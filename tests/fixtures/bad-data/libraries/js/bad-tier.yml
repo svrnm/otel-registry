@@ -1,0 +1,4 @@
+name: Broken
+options:
+  - tier: gold
+    repo: https://github.com/a/b

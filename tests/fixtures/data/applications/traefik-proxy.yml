@@ -1,0 +1,5 @@
+name: Traefik Proxy
+options:
+  - tier: native
+    repo: https://github.com/traefik/traefik
+    docs: https://doc.traefik.io/traefik/observability/tracing/opentelemetry/
