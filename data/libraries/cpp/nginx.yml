@@ -1,7 +1,7 @@
 name: NGINX
 options:
   - tier: first-party
-    repo: https://github.com/nginxinc/nginx-otel
+    repo: https://github.com/nginx/nginx-otel
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/nginx
     note: NGINX OpenTelemetry module to add OpenTelemetry distributed tracing support to NGINX.
