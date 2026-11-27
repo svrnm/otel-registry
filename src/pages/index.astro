@@ -1,0 +1,113 @@
+---
+// The whole site: a visual copy of opentelemetry.io/ecosystem/registry/, rendered from public/registry.json.
+import { readFileSync } from 'node:fs';
+import Card from '../components/Card.astro';
+import type { RegistryEntry } from '../registry/merge.ts';
+import '../styles/registry.scss';
+
+const entries: RegistryEntry[] = JSON.parse(readFileSync('public/registry.json', 'utf8'));
+const REPO = 'https://github.com/svrnm/otel-registry';
+
+const NAMES: Record<string, string> = { cpp: 'C++', dotnet: '.NET', js: 'JavaScript', php: 'PHP' };
+const languageName = (id: string) => NAMES[id] ?? id.charAt(0).toUpperCase() + id.slice(1);
+const OFFICIAL = ['cpp', 'erlang', 'elixir', 'dotnet', 'go', 'java', 'js', 'php', 'python', 'ruby', 'rust', 'swift'];
+const languages = [...new Set(entries.map((e) => e.language).filter((l): l is string => !!l))].sort();
+const TIERS = [
+  ['native', 'Native'],
+  ['first-party', 'First party'],
+  ['otel', 'OpenTelemetry'],
+  ['third-party', 'Third party'],
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Registry (prototype)</title>
+    <meta name="description" content="Prototype of a leaner OpenTelemetry registry: applications and libraries with OpenTelemetry instrumentation." />
+  </head>
+  <body>
+    <nav class="navbar navbar-dark navbar-registry">
+      <div class="container">
+        <span class="navbar-brand mb-0 h1">Registry <span class="badge text-bg-warning align-middle ms-2">Prototype</span></span>
+        <a class="nav-link text-white" href={REPO}><i class="fa-brands fa-github" aria-hidden="true"></i> Source</a>
+      </div>
+    </nav>
+    <div class="alert alert-warning prototype-banner text-center" role="alert">
+      <strong>Prototype.</strong> Not an official OpenTelemetry page. Data may be incomplete.
+      The official registry is at <a href="https://opentelemetry.io/ecosystem/registry/">opentelemetry.io/ecosystem/registry</a>.
+    </div>
+
+    <main class="container py-4">
+      <h1>Registry</h1>
+      <p class="lead">Find applications and libraries that you can get OpenTelemetry telemetry from.</p>
+      <p>
+        Each entry is one instrumented application or library. Where there are several ways to instrument it, native support comes first,
+        then first-party integrations, then OpenTelemetry-maintained instrumentation, then third-party instrumentation.
+      </p>
+
+      <div class="pb-4">
+        <form id="searchForm">
+          <div class="input-group">
+            <span class="input-group-text" id="result-count">Search {entries.length} entries</span>
+            <input class="form-control w-auto" id="input-s" type="text" name="s" placeholder="Type to search…" aria-label="Registry search input field" />
+            <button type="submit" class="btn btn-outline-success">Submit</button>
+            <button type="button" class="btn btn-outline-danger" id="reset">Reset</button>
+
+            <button class="btn btn-outline-secondary dropdown-toggle" id="languageDropdown" data-label="Language" type="button" data-bs-toggle="dropdown" aria-expanded="false">Language</button>
+            <ul class="dropdown-menu" id="languageFilter">
+              <li><a href="#" data-value="all" class="dropdown-item">Any Language</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              {languages.filter((l) => OFFICIAL.includes(l)).map((l) => <li><a href="#" data-value={l} class="dropdown-item">{languageName(l)}</a></li>)}
+              <li><hr class="dropdown-divider" /></li>
+              {languages.filter((l) => !OFFICIAL.includes(l)).map((l) => <li><a href="#" data-value={l} class="dropdown-item">{languageName(l)}</a></li>)}
+            </ul>
+
+            <button class="btn btn-outline-secondary dropdown-toggle" id="tierDropdown" data-label="Source" type="button" data-bs-toggle="dropdown" aria-expanded="false">Source</button>
+            <ul class="dropdown-menu" id="tierFilter">
+              <li><a href="#" data-value="all" class="dropdown-item">Any Source</a></li>
+              {TIERS.map(([value, text]) => <li><a href="#" data-value={value} class="dropdown-item">{text}</a></li>)}
+            </ul>
+
+            <button class="btn btn-outline-secondary dropdown-toggle" id="kindDropdown" data-label="Type" type="button" data-bs-toggle="dropdown" aria-expanded="false">Type</button>
+            <ul class="dropdown-menu" id="kindFilter">
+              <li><a href="#" data-value="all" class="dropdown-item">Any Type</a></li>
+              <li><a href="#" data-value="application" class="dropdown-item">Application</a></li>
+              <li><a href="#" data-value="library" class="dropdown-item">Library</a></li>
+            </ul>
+          </div>
+        </form>
+      </div>
+
+      <div class="mx-auto">
+        <p class="text-center text-body-secondary d-none" id="no-results">No entries match.</p>
+        <ul class="list-unstyled" id="registry-list" data-source="/registry.json">
+          {entries.map((entry) => <Card entry={entry} languageName={languageName} />)}
+        </ul>
+      </div>
+
+      <hr class="my-5" />
+      <h2 class="h4" id="add">Add or fix an entry</h2>
+      <p>
+        An entry is one small YAML file: a name, a tier and a link. Licence, maintainer, description and CNCF status are read from the
+        repository when the site is built. Entries whose links die or whose repository is archived are hidden, and removed after 30 days.
+        See the <a href={`${REPO}#readme`}>README</a> for the format.
+      </p>
+    </main>
+
+    <footer class="navbar-registry text-white-50 py-4 mt-5">
+      <div class="container small">
+        Prototype of a leaner registry for OpenTelemetry. OpenTelemetry-maintained entries come from the
+        <a class="text-white" href="https://explorer.opentelemetry.io">Ecosystem Explorer</a>.
+      </div>
+    </footer>
+
+    <script>
+      import 'bootstrap/js/dist/dropdown';
+      import '../scripts/search.ts';
+    </script>
+  </body>
+</html>
