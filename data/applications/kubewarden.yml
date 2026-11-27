@@ -1,5 +1,5 @@
 name: Kubewarden
 options:
   - tier: native
-    repo: https://github.com/kubewarden/kubewarden-controller
+    repo: https://github.com/kubewarden/adm-controller
     docs: https://docs.kubewarden.io/admission-controller/latest/en/howtos/telemetry/10-opentelemetry-qs.html
