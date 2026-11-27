@@ -1,0 +1,4 @@
+name: spdlog
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/spdlog

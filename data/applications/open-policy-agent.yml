@@ -1,0 +1,5 @@
+name: Open Policy Agent
+options:
+  - tier: native
+    repo: https://github.com/open-policy-agent/opa
+    docs: https://www.openpolicyagent.org/docs/latest/monitoring/#opentelemetry

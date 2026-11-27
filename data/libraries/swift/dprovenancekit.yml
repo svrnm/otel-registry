@@ -1,0 +1,5 @@
+name: DProvenanceKit
+options:
+  - tier: third-party
+    repo: https://github.com/Therealdk8890/DProvenanceKit
+    docs: https://github.com/Therealdk8890/DProvenanceKit/blob/main/docs/otel-bridge.md

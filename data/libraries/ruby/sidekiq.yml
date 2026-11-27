@@ -1,0 +1,7 @@
+name: sidekiq
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-sidekiq/v0.29.0/instrumentation/sidekiq
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-sidekiq/0.29.0
+    package: gem:opentelemetry-instrumentation-sidekiq
+    note: Sidekiq instrumentation for the OpenTelemetry framework

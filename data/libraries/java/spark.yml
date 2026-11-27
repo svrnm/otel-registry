@@ -1,0 +1,5 @@
+name: Spark Web Framework
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/spark-2.4
+    note: This library provides a Spark Web Framework instrumentation to track requests through OpenTelemetry.

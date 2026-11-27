@@ -1,0 +1,7 @@
+name: trilogy
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-trilogy/v0.69.0/instrumentation/trilogy
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-trilogy/0.69.0
+    package: gem:opentelemetry-instrumentation-trilogy
+    note: Adds auto instrumentation that includes SQL metadata

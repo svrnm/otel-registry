@@ -1,0 +1,4 @@
+name: Boost.Log
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/boost_log

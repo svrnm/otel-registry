@@ -1,0 +1,5 @@
+name: OpenTracing Shim
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-python/tree/main/shim/opentelemetry-opentracing-shim
+    note: OpenTracing Shim for OpenTelemetry

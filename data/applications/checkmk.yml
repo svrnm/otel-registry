@@ -1,0 +1,5 @@
+name: Checkmk
+options:
+  - tier: native
+    repo: https://github.com/Checkmk/checkmk
+    docs: https://checkmk.com/werk/16565

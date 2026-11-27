@@ -1,0 +1,7 @@
+name: http_client
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-http_client/v0.29.0/instrumentation/http_client
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-http_client/0.29.0
+    package: gem:opentelemetry-instrumentation-http_client
+    note: HttpClient instrumentation for the OpenTelemetry framework

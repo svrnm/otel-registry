@@ -1,0 +1,7 @@
+name: mongo
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-mongo/v0.26.0/instrumentation/mongo
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-mongo/0.26.0
+    package: gem:opentelemetry-instrumentation-mongo
+    note: Mongo instrumentation for the OpenTelemetry framework

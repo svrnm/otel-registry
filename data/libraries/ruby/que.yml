@@ -1,0 +1,7 @@
+name: que
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-que/v0.13.0/instrumentation/que
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-que/0.13.0
+    package: gem:opentelemetry-instrumentation-que
+    note: Que instrumentation for the OpenTelemetry framework

@@ -1,0 +1,4 @@
+name: Startup
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-android/tree/main/instrumentation/startup

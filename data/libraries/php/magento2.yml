@@ -1,0 +1,5 @@
+name: Magento2
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/Magento2
+    note: This is a read-only subtree split of https://github.com/open-telemetry/opentelemetry-php-contrib.

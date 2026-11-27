@@ -1,0 +1,4 @@
+name: Resty
+options:
+  - tier: third-party
+    repo: https://github.com/dubonzi/otelresty

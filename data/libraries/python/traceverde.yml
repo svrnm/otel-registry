@@ -1,0 +1,6 @@
+name: TraceVerde
+options:
+  - tier: third-party
+    repo: https://github.com/Mandark-droid/genai_otel_instrument
+    docs: https://mandark-droid.github.io/genai_otel_instrument/
+    package: pypi:genai-otel-instrument

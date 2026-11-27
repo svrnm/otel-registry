@@ -1,0 +1,4 @@
+name: Echo
+options:
+  - tier: third-party
+    repo: https://github.com/labstack/echo-opentelemetry

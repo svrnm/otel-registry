@@ -1,0 +1,5 @@
+name: Tracing
+options:
+  - tier: third-party
+    repo: https://github.com/tokio-rs/tracing-opentelemetry
+    package: crates:tracing-opentelemetry

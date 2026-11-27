@@ -1,0 +1,11 @@
+name: dalli
+options:
+  - tier: native
+    repo: https://github.com/petergoldstein/dalli/
+    docs: https://github.com/petergoldstein/dalli/blob/main/README.md
+    package: gem:dalli
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-dalli/v0.30.0/instrumentation/dalli
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-dalli/0.30.0
+    package: gem:opentelemetry-instrumentation-dalli
+    note: Dalli instrumentation for the OpenTelemetry framework

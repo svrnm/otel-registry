@@ -1,0 +1,5 @@
+name: BullMQ
+options:
+  - tier: third-party
+    repo: https://github.com/jenniferplusplus/opentelemetry-instrumentation-bullmq
+    package: npm:@jenniferplusplus/opentelemetry-instrumentation-bullmq

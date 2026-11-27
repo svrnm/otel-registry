@@ -1,0 +1,5 @@
+name: gRPC
+options:
+  - tier: first-party
+    repo: https://github.com/grpc/grpc-java
+    docs: https://grpc.io/docs/guides/opentelemetry-metrics/

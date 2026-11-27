@@ -1,0 +1,10 @@
+name: Symfony
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/Symfony
+    package: packagist:open-telemetry/opentelemetry-auto-symfony
+    note: Instrumentation Library for the Symfony Framework
+  - tier: third-party
+    repo: https://github.com/tracewayapp/opentelemetry-symfony-bundle
+    docs: https://github.com/tracewayapp/opentelemetry-symfony-bundle#readme
+    package: packagist:traceway/opentelemetry-symfony

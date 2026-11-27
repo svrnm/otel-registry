@@ -1,0 +1,4 @@
+name: Connect RPC
+options:
+  - tier: first-party
+    repo: https://github.com/connectrpc/otelconnect-go

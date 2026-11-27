@@ -1,0 +1,5 @@
+name: ruby_llm
+options:
+  - tier: third-party
+    repo: https://github.com/thoughtbot/opentelemetry-instrumentation-ruby_llm
+    package: gem:opentelemetry-instrumentation-ruby_llm

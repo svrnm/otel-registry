@@ -1,0 +1,6 @@
+name: CakePHP
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/CakePHP
+    package: packagist:open-telemetry/opentelemetry-auto-cakephp
+    note: Please read </docs/instrumentation/php/automatic/> for instructions on how to install and configure the extension and SDK.

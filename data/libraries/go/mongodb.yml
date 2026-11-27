@@ -1,0 +1,8 @@
+name: MongoDB Go Driver
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/tree/main/instrumentation/go.mongodb.org/mongo-driver/mongo
+    note: Go compile-time auto-instrumentation plugin for the [`go.mongodb.org/mongo-driver/mongo` package](https://pkg.go.dev/go.mongodb.org/mongo-driver/mongo).
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation/go.mongodb.org/mongo-driver
+    note: Package mongo-driver provides functions to trace the [go.mongodb.org/mongo-driver/mongo](https://github.com/mongodb/mongo-go-driver) package.

@@ -1,0 +1,5 @@
+name: Doctrine
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/Doctrine
+    note: This package provides auto-instrumentation for the Doctrine DBAL and ORM libraries.

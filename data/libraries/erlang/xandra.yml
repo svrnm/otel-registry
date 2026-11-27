@@ -1,0 +1,6 @@
+name: Xandra
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_xandra
+    package: hex:opentelemetry_xandra
+    note: This library uses [Telemetry](https://github.com/beam-telemetry/telemetry/) events to create OpenTelemetry Spans for [Xandra](https://github.com/whatyouhide/xandra) queries.

@@ -1,0 +1,5 @@
+name: Jenkins
+options:
+  - tier: first-party
+    repo: https://github.com/jenkinsci/opentelemetry-plugin/
+    docs: https://plugins.jenkins.io/opentelemetry/

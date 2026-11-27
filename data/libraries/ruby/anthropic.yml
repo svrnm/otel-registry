@@ -1,0 +1,7 @@
+name: anthropic
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-anthropic/v0.5.0/instrumentation/anthropic
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-anthropic/0.5.0
+    package: gem:opentelemetry-instrumentation-anthropic
+    note: Anthropic instrumentation for the OpenTelemetry framework

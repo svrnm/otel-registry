@@ -1,0 +1,6 @@
+name: IO
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/IO
+    package: packagist:open-telemetry/opentelemetry-auto-io
+    note: Instrumentation Library for PHP IO

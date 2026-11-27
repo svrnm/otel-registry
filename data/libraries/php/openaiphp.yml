@@ -1,0 +1,6 @@
+name: openai-php/client
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/OpenAIPHP
+    package: packagist:open-telemetry/opentelemetry-auto-openai-php
+    note: This package provides auto-instrumentation for [openai-php/client](https://packagist.org/packages/openai-php/client) to help you understand the interactions with OpenAI compatible services.

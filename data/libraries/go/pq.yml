@@ -1,0 +1,5 @@
+name: lib/pq
+options:
+  - tier: third-party
+    repo: https://github.com/signalfx/splunk-otel-go/tree/main/instrumentation/github.com/lib/pq/splunkpq
+    note: Instrumentation for the `github.com/lib/pq` package.

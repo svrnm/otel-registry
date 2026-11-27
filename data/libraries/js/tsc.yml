@@ -1,0 +1,6 @@
+name: TypeScript Compiler for Business Logic
+options:
+  - tier: third-party
+    repo: https://github.com/CeranaStudio/tsc-opentelemetry-instrumentation
+    docs: https://github.com/CeranaStudio/tsc-opentelemetry-instrumentation/blob/main/README.md
+    package: npm:@waitingliou/tsc-otel-instrumentation

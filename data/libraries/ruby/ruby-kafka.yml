@@ -1,0 +1,7 @@
+name: ruby_kafka
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-ruby_kafka/v0.25.0/instrumentation/ruby_kafka
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-ruby_kafka/0.25.0
+    package: gem:opentelemetry-instrumentation-ruby_kafka
+    note: RubyKafka instrumentation for the OpenTelemetry framework

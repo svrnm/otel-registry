@@ -1,0 +1,4 @@
+name: Amazon SQS
+options:
+  - tier: third-party
+    repo: https://github.com/udhos/opentelemetry-trace-sqs

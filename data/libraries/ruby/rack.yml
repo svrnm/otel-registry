@@ -1,0 +1,7 @@
+name: rack
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-rack/v0.31.1/instrumentation/rack
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-rack/0.31.1
+    package: gem:opentelemetry-instrumentation-rack
+    note: Rack instrumentation for the OpenTelemetry framework

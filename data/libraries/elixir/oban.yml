@@ -1,0 +1,5 @@
+name: Oban
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_oban
+    note: Instrumentation for Oban job processing framework.

@@ -1,0 +1,5 @@
+name: Neo4j
+options:
+  - tier: third-party
+    repo: https://github.com/aspecto-io/opentelemetry-ext-js/tree/master/packages/instrumentation-neo4j
+    note: Neo4j instrumentation for Node.js.

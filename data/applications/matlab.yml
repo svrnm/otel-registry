@@ -1,0 +1,5 @@
+name: MATLAB
+options:
+  - tier: first-party
+    repo: https://github.com/mathworks/OpenTelemetry-Matlab/
+    docs: https://www.mathworks.com/matlabcentral/fileexchange/130979-opentelemetry-matlab

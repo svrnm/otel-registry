@@ -1,0 +1,5 @@
+name: franz-go
+options:
+  - tier: first-party
+    repo: https://github.com/twmb/franz-go/tree/master/plugin/kotel
+    note: Kotel is an instrumentation plugin for the franz-go Kafka client. It provides tracing and metrics options.

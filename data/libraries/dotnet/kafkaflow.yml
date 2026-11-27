@@ -1,0 +1,6 @@
+name: KafkaFlow
+options:
+  - tier: first-party
+    repo: https://github.com/Farfetch/kafkaflow
+    docs: https://farfetch.github.io/kafkaflow/docs/guides/open-telemetry
+    package: nuget:KafkaFlow.OpenTelemetry

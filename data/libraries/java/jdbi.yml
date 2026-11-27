@@ -1,0 +1,5 @@
+name: JDBI
+options:
+  - tier: first-party
+    repo: https://github.com/jdbi/jdbi
+    docs: https://jdbi.org/#_opentelemetry_tracing

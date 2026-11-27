@@ -1,0 +1,5 @@
+name: Go runtime metrics
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation/runtime
+    note: Go contrib plugin for collecting metrics from Go runtime package

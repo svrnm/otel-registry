@@ -1,0 +1,6 @@
+name: Class
+options:
+  - tier: third-party
+    repo: https://github.com/eerzho/opentelemetry-auto-class
+    docs: https://github.com/eerzho/opentelemetry-auto-class/blob/main/README.md
+    package: packagist:eerzho/opentelemetry-auto-class

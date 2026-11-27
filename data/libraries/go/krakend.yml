@@ -1,0 +1,5 @@
+name: KrakenD API Gateway
+options:
+  - tier: first-party
+    repo: https://github.com/krakend/krakend-otel
+    docs: https://www.krakend.io/docs/telemetry/opentelemetry/

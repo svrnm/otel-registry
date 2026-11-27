@@ -1,0 +1,5 @@
+name: KEDA
+options:
+  - tier: native
+    repo: https://github.com/kedacore/keda
+    docs: https://keda.sh/docs/latest/integrations/opentelemetry/

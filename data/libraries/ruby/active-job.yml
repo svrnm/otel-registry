@@ -1,0 +1,7 @@
+name: active_job
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-active_job/v0.13.0/instrumentation/active_job
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-active_job/0.13.0
+    package: gem:opentelemetry-instrumentation-active_job
+    note: ActiveJob instrumentation for the OpenTelemetry framework

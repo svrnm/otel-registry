@@ -1,0 +1,5 @@
+name: IBM Watsonx
+options:
+  - tier: third-party
+    repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-watsonx
+    note: Instrumentation for IBM Watsonx LLMs (prompts logging, tokens, etc.)

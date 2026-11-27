@@ -1,0 +1,5 @@
+name: Plack
+options:
+  - tier: third-party
+    repo: https://github.com/abh/Plack-Middleware-OpenTelemetry
+    license: MIT

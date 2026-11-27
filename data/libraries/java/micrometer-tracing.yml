@@ -1,0 +1,6 @@
+name: Micrometer Tracing
+options:
+  - tier: third-party
+    repo: https://github.com/micrometer-metrics/tracing/tree/main/micrometer-tracing-bridges/micrometer-tracing-bridge-otel
+    docs: https://docs.micrometer.io/tracing/reference/api.html#_micrometer_tracing_opentelemetry_setup
+    note: Micrometer Tracing supports the OpenTelemetry Tracer.

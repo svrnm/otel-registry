@@ -1,0 +1,7 @@
+name: redis
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-redis/v0.29.0/instrumentation/redis
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-redis/0.29.0
+    package: gem:opentelemetry-instrumentation-redis
+    note: Redis instrumentation for the OpenTelemetry framework

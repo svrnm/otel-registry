@@ -1,0 +1,5 @@
+name: Cohere
+options:
+  - tier: third-party
+    repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-cohere
+    note: Instrumentation for Cohere LLMs (prompts logging, tokens, etc.)

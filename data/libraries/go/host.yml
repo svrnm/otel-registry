@@ -1,0 +1,5 @@
+name: Host
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation/host
+    note: Go contrib plugin for the host package.

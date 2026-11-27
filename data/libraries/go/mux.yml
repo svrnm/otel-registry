@@ -1,0 +1,5 @@
+name: Gorilla Mux
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation/github.com/gorilla/mux
+    note: Package mux provides functions to trace the gorilla/mux package

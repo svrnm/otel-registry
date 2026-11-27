@@ -1,0 +1,5 @@
+name: Kyverno
+options:
+  - tier: first-party
+    repo: https://github.com/kyverno/kyverno
+    docs: https://kyverno.io/docs/monitoring/opentelemetry/

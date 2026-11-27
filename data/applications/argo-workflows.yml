@@ -1,0 +1,5 @@
+name: Argo Workflows
+options:
+  - tier: native
+    repo: https://github.com/argoproj/argo-workflows
+    docs: https://argo-workflows.readthedocs.io/en/latest/metrics/

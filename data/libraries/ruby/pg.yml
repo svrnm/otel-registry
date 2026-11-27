@@ -1,0 +1,7 @@
+name: pg
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-pg/v0.37.0/instrumentation/pg
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-pg/0.37.0
+    package: gem:opentelemetry-instrumentation-pg
+    note: PG (PostgreSQL) instrumentation for the OpenTelemetry framework

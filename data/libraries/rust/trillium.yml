@@ -1,0 +1,5 @@
+name: Trillium
+options:
+  - tier: first-party
+    repo: https://github.com/trillium-rs/trillium-opentelemetry
+    package: crates:trillium-opentelemetry

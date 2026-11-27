@@ -1,0 +1,5 @@
+name: Transformers
+options:
+  - tier: third-party
+    repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-transformers
+    note: Instrumentation for Transformers SDK (HuggingFace)

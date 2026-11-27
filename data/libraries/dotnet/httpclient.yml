@@ -1,0 +1,5 @@
+name: HttpClient
+options:
+  - tier: native
+    repo: https://github.com/dotnet/runtime
+    docs: https://learn.microsoft.com/dotnet/core/diagnostics/built-in-metrics-system-net

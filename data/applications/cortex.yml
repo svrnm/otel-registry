@@ -1,0 +1,5 @@
+name: Cortex
+options:
+  - tier: native
+    repo: https://github.com/cortexproject/cortex
+    docs: https://cortexmetrics.io/docs/guides/tracing/#opentelemetry

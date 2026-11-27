@@ -1,0 +1,7 @@
+name: bunny
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-bunny/v0.25.0/instrumentation/bunny
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-bunny/0.25.0
+    package: gem:opentelemetry-instrumentation-bunny
+    note: Bunny instrumentation for the OpenTelemetry framework

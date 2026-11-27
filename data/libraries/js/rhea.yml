@@ -1,0 +1,6 @@
+name: rhea
+options:
+  - tier: third-party
+    repo: https://github.com/bartoval/opentelemetry-instrumentation-rhea
+    docs: https://github.com/bartoval/opentelemetry-instrumentation-rhea#readme
+    package: npm:opentelemetry-instrumentation-rhea

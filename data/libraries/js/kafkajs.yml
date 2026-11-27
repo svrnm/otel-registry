@@ -1,0 +1,5 @@
+name: kafkajs
+options:
+  - tier: third-party
+    repo: https://github.com/aspecto-io/opentelemetry-ext-js/tree/master/packages/instrumentation-kafkajs
+    note: kafkajs instrumentation for Node.js.

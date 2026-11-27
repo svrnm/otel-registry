@@ -1,0 +1,5 @@
+name: Dapr
+options:
+  - tier: native
+    repo: https://github.com/dapr/dapr
+    docs: https://docs.dapr.io/operations/observability/tracing/otel-collector/open-telemetry-collector/

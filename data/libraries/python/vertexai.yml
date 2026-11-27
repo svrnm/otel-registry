@@ -1,0 +1,5 @@
+name: VertexAI
+options:
+  - tier: third-party
+    repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-vertexai
+    note: Instrumentation for VertexAI LLMs (prompts logging, tokens, etc.)

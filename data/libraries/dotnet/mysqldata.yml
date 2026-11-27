@@ -1,0 +1,6 @@
+name: MySqlData
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.MySqlData
+    package: nuget:OpenTelemetry.Instrumentation.MySqlData
+    note: This is an Instrumentation Library, which instruments MySql.Data and collects telemetry about database operations.

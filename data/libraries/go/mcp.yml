@@ -1,0 +1,5 @@
+name: MCP Server
+options:
+  - tier: third-party
+    repo: https://github.com/olgasafonova/mcp-otel-go
+    docs: https://pkg.go.dev/github.com/olgasafonova/mcp-otel-go/mcpotel

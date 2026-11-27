@@ -1,0 +1,6 @@
+name: Bandit
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_bandit
+    package: hex:opentelemetry_bandit
+    note: Telemetry handler that creates OpenTelemetry spans from [Bandit events](https://hexdocs.pm/bandit/Bandit.Telemetry.html#content).

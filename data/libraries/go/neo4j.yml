@@ -1,0 +1,5 @@
+name: Neo4j Go Driver
+options:
+  - tier: third-party
+    repo: https://github.com/raito-io/neo4j-tracing
+    license: Apache-2.0

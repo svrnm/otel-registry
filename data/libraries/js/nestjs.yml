@@ -1,0 +1,4 @@
+name: NestJS
+options:
+  - tier: third-party
+    repo: https://github.com/pragmaticivan/nestjs-otel

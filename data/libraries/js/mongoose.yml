@@ -1,0 +1,4 @@
+name: Mongoose
+options:
+  - tier: third-party
+    repo: https://github.com/wdalmut/opentelemetry-plugin-mongoose

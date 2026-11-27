@@ -1,0 +1,6 @@
+name: MongoDB
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/MongoDB
+    package: packagist:open-telemetry/opentelemetry-auto-mongodb
+    note: Auto-instrumentation hooks are registered via composer, and spans will automatically be created for all MongoDB operations.

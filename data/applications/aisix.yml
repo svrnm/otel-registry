@@ -1,0 +1,5 @@
+name: AISIX AI Gateway
+options:
+  - tier: native
+    repo: https://github.com/api7/aisix
+    docs: https://docs.api7.ai/ai-gateway/observability/exporters

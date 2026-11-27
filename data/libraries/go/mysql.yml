@@ -1,0 +1,5 @@
+name: go-sql-driver/mysql
+options:
+  - tier: third-party
+    repo: https://github.com/signalfx/splunk-otel-go/tree/main/instrumentation/github.com/go-sql-driver/mysql/splunkmysql
+    note: Instrumentation for the `github.com/go-sql-driver/mysql` package.

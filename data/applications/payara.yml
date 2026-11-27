@@ -1,0 +1,6 @@
+name: Payara Platform
+options:
+  - tier: native
+    repo: https://github.com/payara/Payara
+    docs: https://docs.payara.fish/community/docs/Technical%20Documentation/MicroProfile/OpenTelemetry%20and%20OpenTracing.html
+    license: EPL-2.0

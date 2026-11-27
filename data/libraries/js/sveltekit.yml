@@ -1,0 +1,5 @@
+name: SvelteKit
+options:
+  - tier: native
+    repo: https://github.com/sveltejs/kit
+    docs: https://svelte.dev/docs/kit/observability

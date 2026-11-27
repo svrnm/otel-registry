@@ -1,0 +1,5 @@
+name: TypeORM
+options:
+  - tier: third-party
+    repo: https://github.com/aspecto-io/opentelemetry-ext-js/tree/master/packages/instrumentation-typeorm
+    note: TypeORM instrumentation for Node.js.

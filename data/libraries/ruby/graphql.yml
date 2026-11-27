@@ -1,0 +1,7 @@
+name: graphql
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-graphql/v0.32.0/instrumentation/graphql
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-graphql/0.32.0
+    package: gem:opentelemetry-instrumentation-graphql
+    note: GraphQL instrumentation for the OpenTelemetry framework

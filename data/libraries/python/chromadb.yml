@@ -1,0 +1,5 @@
+name: ChromaDB
+options:
+  - tier: third-party
+    repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-chromadb
+    note: Instrumentation for Chroma Vector DB

@@ -1,0 +1,7 @@
+name: base
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-base/v0.26.1/instrumentation/base
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-base/0.26.1
+    package: gem:opentelemetry-instrumentation-base
+    note: Instrumentation Base for the OpenTelemetry framework

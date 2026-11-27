@@ -1,0 +1,5 @@
+name: Angular
+options:
+  - tier: third-party
+    repo: https://github.com/jufab/opentelemetry-angular-interceptor
+    package: npm:@jufab/opentelemetry-angular-interceptor

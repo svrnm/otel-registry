@@ -1,0 +1,6 @@
+name: FusionCache
+options:
+  - tier: native
+    repo: https://github.com/ZiggyCreatures/FusionCache
+    docs: https://github.com/ZiggyCreatures/FusionCache/blob/main/docs/OpenTelemetry.md
+    package: nuget:ZiggyCreatures.FusionCache

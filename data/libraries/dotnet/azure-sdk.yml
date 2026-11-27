@@ -1,0 +1,5 @@
+name: Azure SDK
+options:
+  - tier: native
+    repo: https://github.com/Azure/azure-sdk-for-net
+    docs: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#opentelemetry-configuration

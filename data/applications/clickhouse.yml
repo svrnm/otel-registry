@@ -1,0 +1,5 @@
+name: ClickHouse
+options:
+  - tier: native
+    repo: https://github.com/clickhouse
+    docs: https://clickhouse.com/docs/en/operations/opentelemetry

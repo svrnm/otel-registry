@@ -1,0 +1,7 @@
+name: resque
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-resque/v0.9.0/instrumentation/resque
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-resque/0.9.0
+    package: gem:opentelemetry-instrumentation-resque
+    note: Resque instrumentation for the OpenTelemetry framework

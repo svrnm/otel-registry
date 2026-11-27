@@ -1,0 +1,7 @@
+name: gruf
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-gruf/v0.6.2/instrumentation/gruf
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-gruf/0.6.2
+    package: gem:opentelemetry-instrumentation-gruf
+    note: Gruf instrumentation for the OpenTelemetry framework

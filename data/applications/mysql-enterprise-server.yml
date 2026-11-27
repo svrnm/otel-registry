@@ -1,0 +1,6 @@
+name: MySQL Enterprise Server
+options:
+  - tier: native
+    docs: https://dev.mysql.com/doc/refman/9.2/en/telemetry-trace.html
+    license: proprietary
+    note: MySQL Enterprise Edition generates OTel trace data on Linux platforms.

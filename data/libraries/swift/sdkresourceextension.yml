@@ -1,0 +1,5 @@
+name: SDK Resource extension
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-swift/tree/main/Sources/Instrumentation/SDKResourceExtension
+    note: This package captures a number of key data points of an application and generates a Resource object that can be passed to a `TracerProvider`

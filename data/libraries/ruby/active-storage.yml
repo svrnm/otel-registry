@@ -1,0 +1,7 @@
+name: active_storage
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-active_storage/v0.5.1/instrumentation/active_storage
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-active_storage/0.5.1
+    package: gem:opentelemetry-instrumentation-active_storage
+    note: ActiveStorage instrumentation for the OpenTelemetry framework

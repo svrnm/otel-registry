@@ -1,0 +1,16 @@
+name: database/sql
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/tree/main/instrumentation/database/sql
+    note: Go compile-time auto-instrumentation plugin for the [`database/sql` package](https://pkg.go.dev/database/sql).
+  - tier: third-party
+    repo: https://github.com/nhatthm/otelsql
+  - tier: third-party
+    repo: https://github.com/signalfx/splunk-otel-go/tree/main/instrumentation/database/sql/splunksql
+    note: Instrumentation for the Golang `database/sql` package.
+  - tier: third-party
+    repo: https://github.com/uptrace/opentelemetry-go-extra/tree/main/otelsql
+    note: Instrumentation for SQL that records queries (including transactions and statements) and reports DBStats metrics.
+  - tier: third-party
+    repo: https://github.com/XSAM/otelsql
+    package: go:github.com/XSAM/otelsql

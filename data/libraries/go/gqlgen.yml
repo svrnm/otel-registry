@@ -1,0 +1,4 @@
+name: Gqlgen
+options:
+  - tier: third-party
+    repo: https://github.com/ravilushqa/otelgqlgen

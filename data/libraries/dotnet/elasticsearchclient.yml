@@ -1,0 +1,6 @@
+name: Elasticsearch Client
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.ElasticsearchClient
+    package: nuget:OpenTelemetry.Instrumentation.ElasticsearchClient
+    note: Automatically instruments events emitted by the NEST/Elasticsearch.Net client library.

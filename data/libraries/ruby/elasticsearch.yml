@@ -1,0 +1,6 @@
+name: elasticsearch
+options:
+  - tier: native
+    repo: https://github.com/elastic/elasticsearch-ruby/tree/main
+    docs: https://www.elastic.co/guide/en/elasticsearch/client/ruby-api/current/opentelemetry.html
+    package: gem:elasticsearch

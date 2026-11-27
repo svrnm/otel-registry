@@ -1,0 +1,8 @@
+name: Mistral AI
+options:
+  - tier: third-party
+    repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-mistralai
+    note: Instrumentation for Mistral AI LLMs (prompts logging, tokens, etc.)
+  - tier: third-party
+    repo: https://github.com/Arize-ai/openinference/tree/main/python/instrumentation/openinference-instrumentation-mistralai
+    note: Instrumentation for tracing the Mistral AI Python SDK

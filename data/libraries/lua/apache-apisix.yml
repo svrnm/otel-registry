@@ -1,0 +1,5 @@
+name: Apache APISIX
+options:
+  - tier: first-party
+    repo: https://github.com/apache/apisix/blob/master/apisix/plugins/opentelemetry.lua
+    note: The plugin implements Tracing data collection based on OpenTelemetry native standard, and sends it to OpenTelemetry Collector through HTTP protocol.

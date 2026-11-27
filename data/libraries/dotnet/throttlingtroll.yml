@@ -1,0 +1,6 @@
+name: ThrottlingTroll
+options:
+  - tier: native
+    repo: https://github.com/ThrottlingTroll/ThrottlingTroll
+    docs: https://github.com/ThrottlingTroll/ThrottlingTroll/wiki#telemetry
+    package: nuget:ThrottlingTroll

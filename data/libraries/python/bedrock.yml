@@ -1,0 +1,5 @@
+name: Amazon Bedrock
+options:
+  - tier: third-party
+    repo: https://github.com/Arize-ai/openinference/tree/main/python/instrumentation/openinference-instrumentation-bedrock
+    note: Instrumentation for tracing Amazon Bedrock framework

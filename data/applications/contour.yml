@@ -1,0 +1,5 @@
+name: Contour
+options:
+  - tier: native
+    repo: https://github.com/projectcontour/contour
+    docs: https://projectcontour.io/docs/main/config/tracing/

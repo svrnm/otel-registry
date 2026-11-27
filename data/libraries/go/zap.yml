@@ -1,0 +1,5 @@
+name: Zap
+options:
+  - tier: third-party
+    repo: https://github.com/uptrace/opentelemetry-go-extra/tree/main/otelzap
+    note: Instrumentation for Zap logging library.

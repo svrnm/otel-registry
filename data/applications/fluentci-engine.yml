@@ -1,0 +1,5 @@
+name: Fluent CI Engine
+options:
+  - tier: native
+    repo: https://github.com/fluentci-io/fluentci-engine
+    docs: https://github.com/fluentci-io/fluentci-engine#-opentelemetry-tracing

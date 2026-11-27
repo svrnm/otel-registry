@@ -1,0 +1,6 @@
+name: CloudWeGo Hertz
+options:
+  - tier: first-party
+    repo: https://github.com/hertz-contrib/obs-opentelemetry
+    docs: https://www.cloudwego.io/docs/hertz/tutorials/third-party/open-telemetry/
+    package: go:github.com/hertz-contrib/obs-opentelemetry

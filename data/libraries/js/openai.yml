@@ -1,0 +1,6 @@
+name: OpenAI
+options:
+  - tier: third-party
+    repo: https://github.com/Arize-ai/openinference/tree/main/js/packages/openinference-instrumentation-openai
+    package: npm:@arizeai/openinference-instrumentation-openai
+    note: Instrumentation for tracing the OpenAI Node.js SDK

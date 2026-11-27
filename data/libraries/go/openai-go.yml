@@ -1,0 +1,5 @@
+name: openai-go
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/tree/main/instrumentation/github.com/openai/openai-go
+    note: Go compile-time auto-instrumentation plugin for the [`openai/openai-go` package](https://pkg.go.dev/github.com/openai/openai-go).

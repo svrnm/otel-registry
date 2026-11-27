@@ -1,0 +1,6 @@
+name: PSR-18 HTTP Clients
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/Psr18
+    package: packagist:open-telemetry/opentelemetry-auto-psr18
+    note: Instrumentation Library for PSR-18 HTTP clients

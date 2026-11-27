@@ -1,0 +1,7 @@
+name: aws_sdk
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-aws_sdk/v0.12.0/instrumentation/aws_sdk
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-aws_sdk/0.12.0
+    package: gem:opentelemetry-instrumentation-aws_sdk
+    note: AWS SDK instrumentation for the OpenTelemetry framework

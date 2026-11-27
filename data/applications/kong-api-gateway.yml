@@ -1,0 +1,5 @@
+name: Kong API Gateway
+options:
+  - tier: first-party
+    repo: https://github.com/Kong/kong
+    docs: https://docs.konghq.com/hub/kong-inc/opentelemetry/

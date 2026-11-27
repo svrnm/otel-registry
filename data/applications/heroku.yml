@@ -1,0 +1,6 @@
+name: Heroku
+options:
+  - tier: native
+    docs: https://devcenter.heroku.com/articles/opentelemetry-concepts-and-heroku
+    license: proprietary
+    note: Heroku Fir adds platform-native support for the collection and distribution of OpenTelemetry signals.

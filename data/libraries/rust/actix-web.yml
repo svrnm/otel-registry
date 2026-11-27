@@ -1,0 +1,5 @@
+name: Actix Web
+options:
+  - tier: third-party
+    repo: https://github.com/OutThereLabs/actix-web-opentelemetry
+    package: crates:actix-web-opentelemetry

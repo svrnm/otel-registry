@@ -1,0 +1,8 @@
+name: Fastify
+options:
+  - tier: first-party
+    repo: https://github.com/fastify/otel
+    package: npm:@fastify/otel
+  - tier: third-party
+    repo: https://github.com/autotelic/fastify-opentelemetry
+    package: npm:@autotelic/fastify-opentelemetry

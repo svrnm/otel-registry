@@ -1,0 +1,6 @@
+name: Yii
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/Yii
+    package: packagist:open-telemetry/opentelemetry-auto-yii
+    note: Instrumentation Library for Yii

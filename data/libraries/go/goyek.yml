@@ -1,0 +1,6 @@
+name: Goyek
+options:
+  - tier: first-party
+    repo: https://github.com/goyek/x/tree/main/otelgoyek
+    docs: https://pkg.go.dev/github.com/goyek/x/otelgoyek
+    note: Package otelgoyek provides OpenTelemetry instrumentation for goyek.

@@ -1,0 +1,8 @@
+name: LlamaIndex
+options:
+  - tier: third-party
+    repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-llamaindex
+    note: Instrumentation for LlamaIndex Framework
+  - tier: third-party
+    repo: https://github.com/Arize-ai/openinference/tree/main/python/instrumentation/openinference-instrumentation-llama-index
+    note: Instrumentation for tracing the LlamaIndex framework

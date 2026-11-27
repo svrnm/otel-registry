@@ -1,0 +1,5 @@
+name: ReactPHP HTTP Browser
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/ReactPHP
+    note: OpenTelemetry auto-instrumentation package for the ReactPHP HTTP library. Currently only the Browser (client) component is instrumented.

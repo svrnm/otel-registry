@@ -1,0 +1,5 @@
+name: Milvus
+options:
+  - tier: third-party
+    repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-milvus
+    note: Instrumentation for Milvus Vector DB

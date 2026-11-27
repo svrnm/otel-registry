@@ -1,0 +1,7 @@
+name: action_mailer
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-action_mailer/v0.8.1/instrumentation/action_mailer
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-action_mailer/0.8.1
+    package: gem:opentelemetry-instrumentation-action_mailer
+    note: ActionMailer instrumentation for the OpenTelemetry framework

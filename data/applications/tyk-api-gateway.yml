@@ -1,0 +1,6 @@
+name: Tyk API Gateway
+options:
+  - tier: native
+    repo: https://github.com/TykTechnologies/tyk
+    docs: https://tyk.io/docs/product-stack/tyk-gateway/advanced-configurations/distributed-tracing/open-telemetry/open-telemetry-overview/
+    license: Apache-2.0

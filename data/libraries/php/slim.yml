@@ -1,0 +1,6 @@
+name: Slim Framework
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/Slim
+    package: packagist:open-telemetry/opentelemetry-auto-slim
+    note: Instrumentation Library for the Slim Framework

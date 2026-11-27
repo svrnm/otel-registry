@@ -1,0 +1,5 @@
+name: Session
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-android/tree/main/instrumentation/sessions
+    note: Out of the box, the `opentelemetry-android` agent will create and manage sessions. Sessions are associated

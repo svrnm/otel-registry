@@ -1,0 +1,11 @@
+name: net/http
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/tree/main/instrumentation/net/http
+    note: Go compile-time auto-instrumentation plugin for the [`net/http` package](https://pkg.go.dev/net/http).
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation/net/http
+    note: Package `http` provides a `http.Handler` and functions that are intended to be used to add tracing by wrapping existing handlers (with Handler).
+  - tier: third-party
+    repo: https://github.com/signalfx/splunk-otel-go/tree/main/instrumentation/net/http/splunkhttp
+    note: Splunk specific instrumentation for the Golang `net/http` package.

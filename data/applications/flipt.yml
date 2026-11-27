@@ -1,0 +1,6 @@
+name: Flipt
+options:
+  - tier: native
+    repo: https://github.com/flipt-io/flipt
+    docs: https://www.flipt.io/docs/configuration/observability#tracing
+    license: Apache-2.0

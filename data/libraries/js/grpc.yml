@@ -1,0 +1,6 @@
+name: gRPC
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-grpc
+    package: npm:@opentelemetry/instrumentation-grpc
+    note: gRPC and gRPC.js instrumentation for Node.js.

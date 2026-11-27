@@ -1,0 +1,6 @@
+name: Cerbos
+options:
+  - tier: first-party
+    repo: https://github.com/cerbos/cerbos-sdk-javascript/
+    docs: https://github.com/cerbos/cerbos-sdk-javascript/tree/main/packages/opentelemetry
+    package: npm:@cerbos/opentelemetry

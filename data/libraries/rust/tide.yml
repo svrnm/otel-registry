@@ -1,0 +1,5 @@
+name: Tide
+options:
+  - tier: third-party
+    repo: https://github.com/asaaki/opentelemetry-tide
+    package: crates:opentelemetry-tide

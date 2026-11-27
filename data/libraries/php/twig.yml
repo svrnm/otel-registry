@@ -1,0 +1,5 @@
+name: Twig
+options:
+  - tier: third-party
+    repo: https://github.com/cmelius/opentelemetry-auto-twig/tree/main
+    package: packagist:cmelius/opentelemetry-auto-twig

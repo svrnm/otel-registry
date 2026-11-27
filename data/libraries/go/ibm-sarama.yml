@@ -1,0 +1,5 @@
+name: IBM/sarama
+options:
+  - tier: third-party
+    repo: https://github.com/dnwe/otelsarama
+    package: go:github.com/dnwe/otelsarama

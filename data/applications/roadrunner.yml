@@ -1,0 +1,5 @@
+name: RoadRunner
+options:
+  - tier: first-party
+    repo: https://github.com/roadrunner-server/otel
+    docs: https://docs.roadrunner.dev/docs/logging-and-observability/otel

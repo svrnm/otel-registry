@@ -1,0 +1,6 @@
+name: Azure SDK
+options:
+  - tier: first-party
+    repo: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk
+    package: npm:@azure/opentelemetry-instrumentation-azure-sdk
+    note: Instrumentation for Azure SDK for JavaScript (Track 2 libraries).

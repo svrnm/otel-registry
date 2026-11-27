@@ -1,0 +1,7 @@
+name: factory_bot
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-factory_bot/v0.2.0/instrumentation/factory_bot
+    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-factory_bot/0.2.0
+    package: gem:opentelemetry-instrumentation-factory_bot
+    note: FactoryBot instrumentation for the OpenTelemetry framework

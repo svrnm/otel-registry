@@ -1,0 +1,5 @@
+name: OpenAI Agents
+options:
+  - tier: otel
+    repo: https://github.com/open-telemetry/opentelemetry-python-genai/tree/main/instrumentation/opentelemetry-instrumentation-genai-openai-agents
+    note: This library traces applications built with the
