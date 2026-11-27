@@ -1,7 +1,0 @@
-name: all
-options:
-  - tier: otel
-    repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-all/v0.96.0/instrumentation/all
-    docs: https://rubydoc.info/gems/opentelemetry-instrumentation-all/0.96.0
-    package: gem:opentelemetry-instrumentation-all
-    note: All-in-one instrumentation bundle for the OpenTelemetry framework

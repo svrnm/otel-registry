@@ -12,7 +12,7 @@ import { loadTargets } from './targets.ts';
 import { fetchExplorer, readExplorer } from './explorer.ts';
 import { fetchFacts, fetchLandscape, repoKey } from './facts.ts';
 import type { CncfLevel } from './facts.ts';
-import { checkLinks, linksToCheck, runChecks } from './checks.ts';
+import { checkLinks, linksToCheck, runChecks, unknownOptions } from './checks.ts';
 import type { LinkStatus } from './checks.ts';
 import { buildRegistry } from './merge.ts';
 
@@ -57,7 +57,7 @@ try {
   );
 
   write(values.out, registry);
-  write(values.report, { generatedAt: new Date().toISOString(), tokenUsed: !!token, findings, moved });
+  write(values.report, { generatedAt: new Date().toISOString(), tokenUsed: !!token, findings, unknown: unknownOptions(targets, facts, links), moved });
 
   for (const f of findings) console.log(`marked  ${f.file} option ${f.option}  ${f.check}: ${f.reason}`);
   for (const m of moved) console.log(`moved   ${m.file} option ${m.option}  repository is now ${m.to}`);

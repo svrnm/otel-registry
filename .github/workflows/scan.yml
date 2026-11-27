@@ -7,6 +7,10 @@ on:
   schedule:
     - cron: '17 5 * * 1' # Mondays 05:17 UTC
   workflow_dispatch:
+    inputs:
+      remove_after_days:
+        description: Days an option must have been marked before it is proposed for removal
+        default: '30'
 
 permissions:
   contents: write
@@ -21,8 +25,11 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
+      # Always the default branch: a scan of any other branch would see different data,
+      # clear marks and close the removal pull request.
       - uses: actions/checkout@v7
         with:
+          ref: ${{ github.event.repository.default_branch }}
           fetch-depth: 0
       - uses: actions/setup-node@v7
         with:
@@ -33,12 +40,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: npm run data
-      - name: Update the tracking issue and the removal pull request
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: node src/registry/lifecycle.ts
+      # Before the next step, so the site keeps refreshing even if that step fails.
       - name: Rebuild the site
         env:
           NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
         if: env.NETLIFY_BUILD_HOOK != ''
         run: curl -fsS -X POST "$NETLIFY_BUILD_HOOK"
+      - name: Update the tracking issue and the removal pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REMOVE_AFTER_DAYS: ${{ inputs.remove_after_days }}
+        run: node src/registry/lifecycle.ts

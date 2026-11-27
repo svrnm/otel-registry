@@ -78,3 +78,12 @@ test('loadTargets reports all bad files at once', () => {
     (e: Error) => e.message.includes('libraries/js/bad-tier.yml') && e.message.includes('applications/unknown-field.yml'),
   );
 });
+
+test('rejects tier otel on a repo outside the open-telemetry org', () => {
+  assert.throws(
+    () => parseTarget('libraries/js/x.yml', 'name: X\noptions:\n  - tier: otel\n    repo: https://github.com/acme/x\n'),
+    /open-telemetry/,
+  );
+  const ok = parseTarget('libraries/js/x.yml', 'name: X\noptions:\n  - tier: otel\n    repo: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/x\n');
+  assert.equal(ok.options[0].tier, 'otel');
+});

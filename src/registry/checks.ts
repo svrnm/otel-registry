@@ -29,6 +29,22 @@ export function linksToCheck(targets: HandTarget[]): string[] {
   return [...urls];
 }
 
+/** `file#option` keys for options where GitHub or a link gave no definite answer this run. */
+export function unknownOptions(targets: HandTarget[], facts: Facts, links: Map<string, LinkStatus>): string[] {
+  const definite = (url: string) => links.get(url) === 'ok' || links.get(url) === 'dead';
+  const keys: string[] = [];
+  for (const t of targets) {
+    t.options.forEach((o, option) => {
+      const key = repoKey(o.repo);
+      const fact = key ? facts.get(key) : undefined;
+      const repoUnknown = !!key && (!fact || fact === 'unknown');
+      const linkUnknown = (!!o.docs && !definite(o.docs)) || (!!o.repo && needsLinkCheck(o.repo) && !definite(o.repo));
+      if (repoUnknown || linkUnknown) keys.push(`${t.file}#${option}`);
+    });
+  }
+  return keys.sort();
+}
+
 const CONCURRENCY = 8;
 const TIMEOUT_MS = 15_000;
 

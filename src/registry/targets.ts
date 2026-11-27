@@ -66,6 +66,9 @@ export function parseTarget(file: string, text: string): HandTarget {
     if (!o.repo && !o.docs) problems.push(`options.${i}: needs repo or docs`);
     else if (!o.repo && kind === 'library') problems.push(`options.${i}: a library option needs a public repo`);
     else if (!o.repo && o.license !== 'proprietary') problems.push(`options.${i}: without a repo, license must be proprietary`);
+    if (o.tier === 'otel' && !/^https?:\/\/github\.com\/open-telemetry\//i.test(o.repo ?? '')) {
+      problems.push(`options.${i}: tier otel is only for repositories in the open-telemetry GitHub org`);
+    }
   });
   if (problems.length) fail(problems);
 

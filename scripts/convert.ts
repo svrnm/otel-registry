@@ -15,6 +15,8 @@ const MISFITS = new Set([
   // unofficial language SDKs
   'otel-crystal', 'otel-dart', 'otel-haskell', 'otel-julia', 'otel-lua', 'otel-matlab', 'otel-ocaml',
   'otel-perl-api', 'otel-perl-sdk', 'exporter-perl-otlp', 'otel-scala', 'sdk-swift-nautilustelemetry',
+  // bundles and base classes, not an instrumented library
+  'instrumentation-ruby-all', 'instrumentation-ruby-base',
   // zero-code agents
   'otel-go-autoinstrumentation', 'otel-java-instrumentation', 'otel-php-autoinstrumentation',
 ]);
@@ -38,6 +40,12 @@ const REPOS: Record<string, string> = {
   'instrumentation-go-gorm': 'https://github.com/go-gorm/opentelemetry',
   'instrumentation-java-elasticsearch-client': 'https://github.com/elastic/elasticsearch-java',
   'instrumentation-java-quarkus': 'https://github.com/quarkusio/quarkus',
+};
+
+// Repo links that are wrong in today's registry.
+const REPO_FIXES: Record<string, string> = {
+  'instrumentation-python-elasticsearch-client': 'https://github.com/elastic/elasticsearch-py',
+  'application-integration-cpp-clickhouse': 'https://github.com/ClickHouse/ClickHouse',
 };
 
 const LICENSES: Record<string, string> = {
@@ -84,7 +92,8 @@ const NAMES: Record<string, string> = {
 };
 
 const tail = (url: string) => url.replace(/\/+$/, '').split('/').pop()!;
-const oneLine = (s: string | undefined) => (s ? s.trim().replace(/\s+/g, ' ') : undefined);
+// One entry in today's registry has the literal description "undefined".
+const oneLine = (s: string | undefined) => (s && s.trim() !== 'undefined' ? s.trim().replace(/\s+/g, ' ') : undefined);
 const githubRepoRoot = (url: string | undefined) => (url && /^https:\/\/github\.com\/[^/]+\/[^/#?]+\/?$/.test(url) ? url.replace(/\/$/, '') : undefined);
 
 function targetSlug(key: string, language: string): string {
@@ -120,7 +129,7 @@ for (const file of readdirSync(srcDir).filter((f) => f.endsWith('.yml'))) {
   if (!['instrumentation', 'application integration'].includes(e.registryType)) continue;
   if (MISFITS.has(key)) { dropped.push(key); continue; }
 
-  let repo: string | undefined = e.urls?.repo ?? REPOS[key] ?? githubRepoRoot(e.urls?.website) ?? githubRepoRoot(e.urls?.docs);
+  let repo: string | undefined = REPO_FIXES[key] ?? e.urls?.repo ?? REPOS[key] ?? githubRepoRoot(e.urls?.website) ?? githubRepoRoot(e.urls?.docs);
   const goContrib = /^https:\/\/(?:pkg\.go\.dev\/)?go\.opentelemetry\.io\/contrib\/(.+)$/.exec(repo ?? '');
   if (goContrib) repo = `https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/${goContrib[1]}`;
   let docs: string | undefined = e.urls?.docs;
@@ -135,7 +144,10 @@ for (const file of readdirSync(srcDir).filter((f) => f.endsWith('.yml'))) {
 
 // OTel-owned entries the Explorer already covers are generated at build time, not written.
 const generated = readExplorer(explorerDir);
+// Covered by the Explorer under a path the matching below does not catch.
+const ALSO_COVERED = new Set(['instrumentation-java-spark']); // registry says spark-2.4, the Explorer spark-2.3
 function covered(r: Row): boolean {
+  if (ALSO_COVERED.has(r.key)) return true;
   if (r.tier !== 'otel' || !r.repo) return false;
   const pkg: string | undefined = r.e.package?.name;
   const javaPath = (u: string) => u.split('/instrumentation/')[1];

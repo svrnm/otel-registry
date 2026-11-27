@@ -17,17 +17,40 @@ const PR_TITLE = `Remove entries marked for ${REMOVE_AFTER_DAYS} days`;
 const BRANCH = 'removals';
 const OPEN = '<!-- marks';
 const CLOSE = '-->';
+const CHECKS: Check[] = ['repo', 'abandoned', 'licence', 'links', 'duplicate'];
 
 const addDays = (date: string, days: number) => new Date(Date.parse(`${date}T00:00:00Z`) + days * 86_400_000).toISOString().slice(0, 10);
 
-/** A finding already marked keeps its date; a new one is marked today; a mark with no finding is dropped. */
-export function updateMarks(prev: Marks, findings: Finding[], today: string): Marks {
+/**
+ * A finding already marked keeps its date; a new one is marked today; a mark with no finding is dropped.
+ * `unknown` lists options that could not be checked this run: their marks are carried over untouched,
+ * so a throttled or timed-out request does not clear a mark or restart its clock.
+ */
+export function updateMarks(prev: Marks, findings: Finding[], today: string, unknown: string[] = []): Marks {
   const next: Marks = {};
   for (const f of findings) {
     const key = `${f.file}#${f.option}`;
     next[key] = { since: prev[key]?.since ?? today, check: f.check, reason: f.reason };
   }
+  for (const key of unknown) {
+    if (prev[key] && !next[key]) next[key] = prev[key];
+  }
   return next;
+}
+
+/** The threshold in days from REMOVE_AFTER_DAYS; anything but a non-negative integer means the default. */
+export function thresholdDays(value: string | undefined): number {
+  return value !== undefined && /^\d+$/.test(value.trim()) ? Number(value) : REMOVE_AFTER_DAYS;
+}
+
+// The repo is public, so anyone can open an issue with our title or a pull request from a branch
+// with our name. Only the Actions bot's issue and a same-repository pull request are ours.
+export function pickIssue<T extends { title: string; author?: { is_bot?: boolean } }>(issues: T[]): T | undefined {
+  return issues.find((i) => i.title === ISSUE_TITLE && i.author?.is_bot === true);
+}
+
+export function pickPr<T extends { isCrossRepository?: boolean }>(prs: T[]): T | undefined {
+  return prs.find((p) => p.isCrossRepository !== true);
 }
 
 export function dueForRemoval(marks: Marks, today: string, days = REMOVE_AFTER_DAYS): string[] {
@@ -38,11 +61,20 @@ export function parseIssue(body: string): Marks {
   const start = body.indexOf(OPEN);
   if (start < 0) return {};
   const end = body.indexOf(CLOSE, start);
+  let raw: unknown;
   try {
-    return JSON.parse(body.slice(start + OPEN.length, end));
+    raw = JSON.parse(body.slice(start + OPEN.length, end));
   } catch {
     return {};
   }
+  // The body is editable by people with triage rights; keep only well-formed marks.
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {};
+  const marks: Marks = {};
+  for (const [key, m] of Object.entries(raw as Record<string, any>)) {
+    const wellFormed = /^.+\.ya?ml#\d+$/.test(key) && m && typeof m === 'object' && /^\d{4}-\d{2}-\d{2}$/.test(m.since) && !Number.isNaN(Date.parse(m.since)) && CHECKS.includes(m.check) && typeof m.reason === 'string';
+    if (wellFormed) marks[key] = { since: m.since, check: m.check, reason: m.reason };
+  }
+  return marks;
 }
 
 export function renderIssue(marks: Marks, today: string): string {
@@ -75,7 +107,7 @@ export function removeOptions(yamlText: string, indexes: number[]): string | nul
 }
 
 function main() {
-  const report = JSON.parse(readFileSync(process.env.REPORT ?? 'report.json', 'utf8')) as { tokenUsed: boolean; findings: Finding[] };
+  const report = JSON.parse(readFileSync(process.env.REPORT ?? 'report.json', 'utf8')) as { tokenUsed: boolean; findings: Finding[]; unknown?: string[] };
   if (!report.tokenUsed) {
     console.log('The build ran without a token, so nothing was checked. Leaving marks and removals untouched.');
     return;
@@ -86,9 +118,9 @@ function main() {
   const git = (...args: string[]) => execFileSync('git', args, { encoding: 'utf8' }).trim();
 
   // 1. Tracking issue.
-  const issues = JSON.parse(gh('issue', 'list', '--state', 'open', '--search', `"${ISSUE_TITLE}" in:title`, '--json', 'number,title,body')) as { number: number; title: string; body: string }[];
-  const issue = issues.find((i) => i.title === ISSUE_TITLE);
-  const marks = updateMarks(issue ? parseIssue(issue.body) : {}, report.findings, today);
+  const issues = JSON.parse(gh('issue', 'list', '--state', 'open', '--search', `"${ISSUE_TITLE}" in:title author:app/github-actions`, '--json', 'number,title,body,author')) as { number: number; title: string; body: string; author?: { is_bot?: boolean } }[];
+  const issue = pickIssue(issues);
+  const marks = updateMarks(issue ? parseIssue(issue.body) : {}, report.findings, today, report.unknown ?? []);
   writeFileSync('.marks-issue.md', renderIssue(marks, today));
   if (issue) gh('issue', 'edit', String(issue.number), '--body-file', '.marks-issue.md');
   else gh('issue', 'create', '--title', ISSUE_TITLE, '--body-file', '.marks-issue.md');
@@ -96,7 +128,8 @@ function main() {
   console.log(`${Object.keys(marks).length} option(s) marked.`);
 
   // 2. Standing removal pull request, rebuilt from the default branch every time.
-  const due = dueForRemoval(marks, today);
+  const days = thresholdDays(process.env.REMOVE_AFTER_DAYS);
+  const due = dueForRemoval(marks, today, days);
   const byFile = new Map<string, number[]>();
   for (const key of due) {
     const [file, option] = key.split('#');
@@ -111,14 +144,15 @@ function main() {
     if (next === null) rmSync(path);
     else writeFileSync(path, next);
   }
-  const open = JSON.parse(gh('pr', 'list', '--head', BRANCH, '--state', 'open', '--json', 'number')) as { number: number }[];
+  const ours = pickPr(JSON.parse(gh('pr', 'list', '--head', BRANCH, '--state', 'open', '--json', 'number,isCrossRepository')) as { number: number; isCrossRepository?: boolean }[]);
+  const open = ours ? [ours] : [];
   if (!git('status', '--porcelain', '--', dataDir)) {
     if (open.length) gh('pr', 'close', String(open[0].number), '--comment', 'Nothing is due for removal any more.');
     console.log('Nothing is due for removal.');
   } else {
     const runUrl = process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/workflows/scan.yml` : 'the Scan workflow';
     const body = [
-      `These options have been marked for ${REMOVE_AFTER_DAYS} days or more and nobody followed up. Merging removes them.`,
+      `These options have been marked for ${days} days or more and nobody followed up. Merging removes them.`,
       '',
       ...due.map((k) => `- \`${k.split('#')[0]}\` option ${k.split('#')[1]}: ${marks[k].reason} (since ${marks[k].since})`),
       '',

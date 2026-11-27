@@ -50,3 +50,9 @@ test('build exits 1 on a schema error and names the file', () => {
   assert.equal(b.status, 1, b.output);
   assert.match(b.output, /libraries\/js\/bad-tier\.yml/);
 });
+
+test('the report lists options that could not be checked', () => {
+  const b = build('data');
+  // No token: every GitHub-backed option is unknown.
+  assert.deepEqual(b.read('report.json').unknown, ['applications/traefik-proxy.yml#0', 'libraries/dotnet/aspnetcore.yml#0']);
+});

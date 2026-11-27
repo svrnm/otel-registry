@@ -115,3 +115,17 @@ test('403, 429, 500 and a network error are unknown, 404 and 410 are dead, 200 i
     'https://a/429': 'unknown', 'https://a/500': 'unknown', 'https://a/throws': 'unknown',
   });
 });
+
+test('unknownOptions lists options whose facts or link status gave no definite answer', async () => {
+  const { unknownOptions } = await import('../src/registry/checks.ts');
+  const targets = [
+    lib('a', opt()),                                                            // facts known
+    lib('b', opt({ repo: 'https://github.com/acme/b' })),                       // facts unknown
+    lib('c', opt({ repo: 'https://github.com/acme/c', docs: 'https://d.example/c' })), // link unknown
+    lib('d', opt({ repo: 'https://github.com/acme/d', docs: 'https://d.example/d' })), // all known
+    lib('e', opt({ repo: 'https://github.com/acme/mono/tree/main/e' })),        // subdirectory link never answered
+  ];
+  const f = facts({ 'acme/x': ok(), 'acme/b': 'unknown', 'acme/c': ok(), 'acme/d': ok(), 'acme/mono': ok() });
+  const links = new Map<string, LinkStatus>([['https://d.example/c', 'unknown'], ['https://d.example/d', 'ok']]);
+  assert.deepEqual(unknownOptions(targets, f, links), ['libraries/js/b.yml#0', 'libraries/js/c.yml#0', 'libraries/js/e.yml#0']);
+});

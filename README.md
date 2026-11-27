@@ -124,6 +124,11 @@ nothing is checked.
 The entries were converted from the registry data in
 [open-telemetry/opentelemetry.io](https://github.com/open-telemetry/opentelemetry.io/tree/main/data/registry).
 
+## Licence
+
+Not decided yet, which is why there is no `LICENSE` file. The proposal is
+Apache-2.0 for the code and CC-BY-4.0 for the data, as in opentelemetry.io.
+
 ## Deploying
 
 The site is static and builds on Netlify with `npm run build`.
