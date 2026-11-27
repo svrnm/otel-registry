@@ -87,10 +87,10 @@ export function runChecks(targets: HandTarget[], generated: GeneratedTarget[], f
       const known = fact && fact !== 'unknown' ? fact : undefined;
 
       const repeatsSibling = (repo && seenRepos.has(repo)) || (o.package && seenPackages.has(o.package));
-      // The Explorer is the source for OTel-owned options. A hand-written one for the same
-      // repository is the interim copy, even if the path inside the repo has since moved.
-      const repeatsGenerated =
-        gen && ((o.package && o.package === gen.package) || (repo && repo === norm(gen.repo)) || (o.tier === 'otel' && !!o.repo && repoKey(o.repo) === repoKey(gen.repo)));
+      // The Explorer is the source for OTel-owned options: a hand-written copy of the same package
+      // or link is the interim one. A different package from the same repository is not a copy;
+      // one target can have several.
+      const repeatsGenerated = gen && ((o.package && o.package === gen.package) || (repo && repo === norm(gen.repo)));
       if (repo) seenRepos.add(repo);
       if (o.package) seenPackages.add(o.package);
 
