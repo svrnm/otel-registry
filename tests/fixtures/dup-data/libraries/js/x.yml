@@ -1,0 +1,6 @@
+name: X
+options:
+  - tier: third-party
+    repo: https://github.com/acme/x
+  - tier: third-party
+    repo: https://github.com/acme/x

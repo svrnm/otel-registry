@@ -1,0 +1,4 @@
+name: Y
+options:
+  - tier: third-party
+    repo: https://github.com/acme/y
