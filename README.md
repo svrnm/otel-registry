@@ -44,6 +44,15 @@ options:
     docs: https://doc.traefik.io/traefik/observability/tracing/opentelemetry/
 ```
 
+**One file per instrumented thing.** Entries are merged by file name only, so two
+files for the same library show up as two cards. Before adding a file, search
+the site. If the library already has a card, add your option to that target by
+using its id as the file name. Every card's id is in
+[`registry.json`](public/registry.json) once built, and in the page source as
+`data-id`. Cards that come from the Ecosystem Explorer are named after the
+OpenTelemetry package, so the file for NestJS is
+`data/libraries/js/nestjs-core.yml`.
+
 | Field | Required | Meaning |
 |---|---|---|
 | `name` | yes | The instrumented app or library, not the instrumentation |
