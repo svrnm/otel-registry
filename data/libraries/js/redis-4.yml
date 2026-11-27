@@ -1,6 +1,0 @@
-name: Redis for Node.js
-options:
-  - tier: otel
-    repo: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-redis-4
-    package: npm:@opentelemetry/instrumentation-redis-4
-    note: This module provides automatic instrumentation for the `redis@^4.0.0` package.
