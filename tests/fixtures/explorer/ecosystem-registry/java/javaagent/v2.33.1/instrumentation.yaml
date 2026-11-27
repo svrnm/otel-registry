@@ -1,0 +1,6 @@
+file_format: 0.8
+libraries:
+  - name: old-only-1.0
+    display_name: Old Only
+    description: Must not be read.
+    source_path: instrumentation/old-only/old-only-1.0

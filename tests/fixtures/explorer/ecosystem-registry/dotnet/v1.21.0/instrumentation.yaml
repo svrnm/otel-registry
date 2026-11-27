@@ -1,0 +1,13 @@
+modules:
+  - name: OpenTelemetry.AutoInstrumentation.Loader
+    description: Loader used by the OpenTelemetry.AutoInstrumentation project.
+    type: instrumentation
+    version: 1.19.1
+  - name: OpenTelemetry.Instrumentation.AspNetCore
+    description: ASP.NET Core instrumentation for OpenTelemetry .NET
+    type: instrumentation
+    version: 1.21.0
+  - name: OpenTelemetry.Instrumentation.Http
+    description: HTTP instrumentation for OpenTelemetry .NET.
+    type: instrumentation
+    version: 1.21.0
