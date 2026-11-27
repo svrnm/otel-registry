@@ -1,4 +1,4 @@
-name: Cerbos
+target: https://github.com/cerbos/cerbos-sdk-javascript
 options:
   - tier: first-party
     repo: https://github.com/cerbos/cerbos-sdk-javascript/

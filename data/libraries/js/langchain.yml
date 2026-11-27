@@ -1,6 +1,5 @@
-name: LangChain
+target: https://github.com/langchain-ai/langchainjs
 options:
   - tier: third-party
     repo: https://github.com/Arize-ai/openinference/tree/main/js/packages/openinference-instrumentation-langchain
     package: npm:@arizeai/openinference-instrumentation-langchain
-    note: Instrumentation for tracing the LangChain framework

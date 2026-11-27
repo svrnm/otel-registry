@@ -1,8 +1,6 @@
-name: Haystack
+target: https://github.com/deepset-ai/haystack
 options:
   - tier: third-party
     repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-haystack
-    note: Instrumentation for Haystack LLM framework
   - tier: third-party
     repo: https://github.com/Arize-ai/openinference/tree/main/python/instrumentation/openinference-instrumentation-haystack
-    note: Instrumentation for tracing the Haystack framework

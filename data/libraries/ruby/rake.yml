@@ -1,7 +1,6 @@
-name: rake
+target: https://github.com/ruby/rake
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-rake/v0.6.0/instrumentation/rake
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-rake/0.6.0
     package: gem:opentelemetry-instrumentation-rake
-    note: Rake instrumentation for the OpenTelemetry framework

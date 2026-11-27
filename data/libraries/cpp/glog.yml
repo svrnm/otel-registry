@@ -1,4 +1,4 @@
-name: glog
+target: https://github.com/google/glog
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/glog

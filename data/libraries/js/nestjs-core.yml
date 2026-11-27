@@ -1,4 +1,4 @@
-name: NestJS
+target: https://github.com/nestjs/nest
 options:
   - tier: third-party
     repo: https://github.com/MetinSeylan/Nestjs-OpenTelemetry

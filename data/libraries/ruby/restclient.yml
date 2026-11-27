@@ -1,7 +1,6 @@
-name: restclient
+target: https://github.com/rest-client/rest-client
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-restclient/v0.28.0/instrumentation/restclient
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-restclient/0.28.0
     package: gem:opentelemetry-instrumentation-restclient
-    note: REST Client instrumentation for the OpenTelemetry framework

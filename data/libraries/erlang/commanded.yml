@@ -1,5 +1,4 @@
-name: Commanded
+target: https://github.com/commanded/commanded
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_commanded
-    note: Telemetry handler that creates OpenTelemetry spans from Commanded commands and events.

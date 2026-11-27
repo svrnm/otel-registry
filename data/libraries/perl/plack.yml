@@ -1,4 +1,4 @@
-name: Plack
+target: https://github.com/plack/Plack
 options:
   - tier: third-party
     repo: https://github.com/abh/Plack-Middleware-OpenTelemetry

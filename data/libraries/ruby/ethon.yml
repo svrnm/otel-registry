@@ -1,7 +1,6 @@
-name: ethon
+target: https://github.com/typhoeus/ethon
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-ethon/v0.29.0/instrumentation/ethon
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-ethon/0.29.0
     package: gem:opentelemetry-instrumentation-ethon
-    note: Ethon instrumentation for the OpenTelemetry framework

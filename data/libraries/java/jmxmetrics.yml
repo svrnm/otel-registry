@@ -1,5 +1,5 @@
+target: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/jmx-metrics
 name: JMX Metric Insight
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/jmx-metrics
-    note: This subsystem of the OpenTelemetry Java agent provides a framework for collecting and reporting JMX metrics within the instrumented application.

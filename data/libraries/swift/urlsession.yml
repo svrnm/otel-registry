@@ -1,5 +1,5 @@
+target: https://developer.apple.com/documentation/foundation/urlsession
 name: URLSession
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-swift/tree/main/Sources/Instrumentation/URLSession
-    note: This package captures the network calls produced by URLSession.

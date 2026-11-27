@@ -1,5 +1,4 @@
-name: Also Broken
+target: https://github.com/a/c
 website: https://x.example
 options:
   - tier: native
-    repo: https://github.com/a/c

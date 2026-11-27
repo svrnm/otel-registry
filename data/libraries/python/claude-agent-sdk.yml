@@ -1,5 +1,4 @@
-name: Claude Agent SDK
+target: https://github.com/anthropics/claude-agent-sdk-python
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-python-genai/tree/main/instrumentation/opentelemetry-instrumentation-genai-claude-agent-sdk
-    note: This library allows tracing LLM requests made by the

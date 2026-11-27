@@ -1,5 +1,4 @@
-name: Quarkus
+target: https://github.com/quarkusio/quarkus
 options:
   - tier: native
-    repo: https://github.com/quarkusio/quarkus
     docs: https://quarkus.io/guides/opentelemetry

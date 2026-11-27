@@ -1,7 +1,6 @@
-name: http
+target: https://github.com/httprb/http
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-http/v0.30.0/instrumentation/http
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-http/0.30.0
     package: gem:opentelemetry-instrumentation-http
-    note: HTTP instrumentation for the OpenTelemetry framework

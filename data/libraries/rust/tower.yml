@@ -1,5 +1,4 @@
-name: Tower HTTP Middleware
+target: https://github.com/tower-rs/tower
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-rust-contrib/tree/main/opentelemetry-instrumentation-tower
-    note: for [Tower](https://docs.rs/tower)-compatible Rust HTTP servers (Axum, Hyper,

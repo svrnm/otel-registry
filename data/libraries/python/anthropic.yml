@@ -1,8 +1,6 @@
-name: Anthropic
+target: https://github.com/anthropics/anthropic-sdk-python
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-python-genai/tree/main/instrumentation/opentelemetry-instrumentation-genai-anthropic
-    note: This library allows tracing LLM requests made by the
   - tier: third-party
     repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-anthropic
-    note: Instrumentation for Anthropic LLMs (prompts logging, tokens, etc.)

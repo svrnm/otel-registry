@@ -1,5 +1,4 @@
-name: ClickHouse
+target: https://github.com/ClickHouse/ClickHouse
 options:
   - tier: native
-    repo: https://github.com/ClickHouse/ClickHouse
     docs: https://clickhouse.com/docs/en/operations/opentelemetry

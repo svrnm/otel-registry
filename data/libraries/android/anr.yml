@@ -1,3 +1,4 @@
+target: https://github.com/open-telemetry/opentelemetry-android/tree/main/instrumentation/anr
 name: ANR (Application Not Responding)
 options:
   - tier: otel

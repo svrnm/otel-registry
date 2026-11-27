@@ -1,5 +1,4 @@
-name: kgateway
+target: https://github.com/kgateway-dev/kgateway
 options:
   - tier: native
-    repo: https://github.com/kgateway-dev/kgateway
     docs: https://kgateway.dev/docs/envoy/latest/observability/otel-stack/

@@ -1,4 +1,4 @@
-name: Mojolicious
+target: https://github.com/mojolicious/mojo
 options:
   - tier: third-party
     repo: https://github.com/jjatria/mojolicious-plugin-opentelemetry

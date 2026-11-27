@@ -1,4 +1,4 @@
-name: Kyverno
+target: https://github.com/kyverno/kyverno
 options:
   - tier: first-party
     repo: https://github.com/kyverno/kyverno

@@ -1,5 +1,4 @@
-name: Nebulex
+target: https://github.com/elixir-nebulex/nebulex
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_nebulex
-    note: OpentelemetryNebulex uses telemetry handlers to create OpenTelemetry spans

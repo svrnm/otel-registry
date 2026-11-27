@@ -1,4 +1,4 @@
-name: Fastify
+target: https://github.com/fastify/fastify
 options:
   - tier: first-party
     repo: https://github.com/fastify/otel

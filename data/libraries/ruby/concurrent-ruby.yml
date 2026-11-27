@@ -1,7 +1,6 @@
-name: concurrent_ruby
+target: https://github.com/ruby-concurrency/concurrent-ruby
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-concurrent_ruby/v0.25.0/instrumentation/concurrent_ruby
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-concurrent_ruby/0.25.0
     package: gem:opentelemetry-instrumentation-concurrent_ruby
-    note: ConcurrentRuby instrumentation for the OpenTelemetry framework

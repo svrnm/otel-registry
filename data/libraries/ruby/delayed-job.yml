@@ -1,7 +1,6 @@
-name: delayed_job
+target: https://github.com/collectiveidea/delayed_job
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-delayed_job/v0.26.0/instrumentation/delayed_job
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-delayed_job/0.26.0
     package: gem:opentelemetry-instrumentation-delayed_job
-    note: Delayed Job instrumentation for the OpenTelemetry framework

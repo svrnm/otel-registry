@@ -1,4 +1,4 @@
-name: Y
+target: https://github.com/y/y
 options:
   - tier: third-party
     repo: https://github.com/acme/y

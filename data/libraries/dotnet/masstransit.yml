@@ -1,10 +1,8 @@
-name: MassTransit
+target: https://github.com/MassTransit/MassTransit
 options:
   - tier: native
-    repo: https://github.com/MassTransit/MassTransit
     docs: https://masstransit.io/documentation/configuration/observability
     package: nuget:MassTransit
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.MassTransit
     package: nuget:OpenTelemetry.Instrumentation.MassTransit
-    note: Automatically instruments DiagnosticSource events emitted by MassTransit library.

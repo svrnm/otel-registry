@@ -1,4 +1,4 @@
-name: Actix Web
+target: https://github.com/actix/actix-web
 options:
   - tier: third-party
     repo: https://github.com/OutThereLabs/actix-web-opentelemetry

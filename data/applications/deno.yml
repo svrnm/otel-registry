@@ -1,5 +1,4 @@
-name: Deno
+target: https://github.com/denoland/deno
 options:
   - tier: native
-    repo: https://github.com/denoland/deno
     docs: https://docs.deno.com/runtime/fundamentals/open_telemetry/

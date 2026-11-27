@@ -1,6 +1,5 @@
-name: Laravel
+target: https://github.com/laravel/framework
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/Laravel
     package: packagist:open-telemetry/opentelemetry-auto-laravel
-    note: Instrumentation Library for Laravel

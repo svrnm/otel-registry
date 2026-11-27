@@ -1,6 +1,5 @@
-name: HTTPlug async
+target: https://github.com/php-http/httplug
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/HttpAsyncClient
     package: packagist:open-telemetry/opentelemetry-auto-http-async
-    note: Instrumentation Library for PHP HTTP Async Client

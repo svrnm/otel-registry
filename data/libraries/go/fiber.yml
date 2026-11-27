@@ -1,5 +1,4 @@
-name: Fiber
+target: https://github.com/gofiber/fiber
 options:
   - tier: first-party
     repo: https://github.com/gofiber/contrib/tree/main/v3/otel
-    note: Go contrib plugin for the gofiber/fiber package.

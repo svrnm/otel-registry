@@ -1,5 +1,4 @@
-name: BuildKit
+target: https://github.com/moby/buildkit
 options:
   - tier: native
-    repo: https://github.com/moby/buildkit
     docs: https://docs.docker.com/build/building/opentelemetry/

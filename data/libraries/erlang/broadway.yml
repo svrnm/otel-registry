@@ -1,6 +1,5 @@
-name: Broadway
+target: https://github.com/elixir-broadway/broadway
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_broadway
     package: hex:opentelemetry_broadway
-    note: OpenTelemetry tracing for [Broadway](https://elixir-broadway.org/) pipelines.

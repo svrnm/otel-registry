@@ -1,4 +1,4 @@
-name: MCP Server
+target: https://github.com/olgasafonova/mcp-otel-go
 options:
   - tier: third-party
     repo: https://github.com/olgasafonova/mcp-otel-go

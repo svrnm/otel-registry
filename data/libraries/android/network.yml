@@ -1,3 +1,4 @@
+target: https://github.com/open-telemetry/opentelemetry-android/tree/main/instrumentation/network
 name: Network Change
 options:
   - tier: otel

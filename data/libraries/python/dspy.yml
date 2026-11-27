@@ -1,5 +1,4 @@
-name: DSPy
+target: https://github.com/stanfordnlp/dspy
 options:
   - tier: third-party
     repo: https://github.com/Arize-ai/openinference/tree/main/python/instrumentation/openinference-instrumentation-dspy
-    note: Instrumentation for tracing the DSPy framework

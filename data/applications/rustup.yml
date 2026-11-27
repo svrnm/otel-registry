@@ -1,5 +1,4 @@
-name: rustup
+target: https://github.com/rust-lang/rustup
 options:
   - tier: native
-    repo: https://github.com/rust-lang/rustup/
     docs: https://rust-lang.github.io/rustup/dev-guide/tracing.html

@@ -1,6 +1,5 @@
-name: ext-amqp
+target: https://github.com/php-amqp/php-amqp
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/ExtAmqp
     package: packagist:open-telemetry/opentelemetry-auto-ext-amqp
-    note: Instrumentation Library for ext-amqp

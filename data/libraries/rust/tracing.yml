@@ -1,4 +1,4 @@
-name: Tracing
+target: https://github.com/tokio-rs/tracing
 options:
   - tier: third-party
     repo: https://github.com/tokio-rs/tracing-opentelemetry

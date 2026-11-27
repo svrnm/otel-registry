@@ -1,5 +1,6 @@
 // Correctness checks for hand-written options. A check fails only on a definite answer:
 // unknown facts or an unreachable link never mark an option.
+import { effectiveRepo, targetKey } from './targets.ts';
 import type { HandTarget } from './targets.ts';
 import type { GeneratedTarget } from './explorer.ts';
 import { isSubdirectory, repoKey } from './facts.ts';
@@ -35,7 +36,7 @@ export function unknownOptions(targets: HandTarget[], facts: Facts, links: Map<s
   const keys: string[] = [];
   for (const t of targets) {
     t.options.forEach((o, option) => {
-      const key = repoKey(o.repo);
+      const key = repoKey(effectiveRepo(t.target, o));
       const fact = key ? facts.get(key) : undefined;
       const repoUnknown = !!key && (!fact || fact === 'unknown');
       const linkUnknown = (!!o.docs && !definite(o.docs)) || (!!o.repo && needsLinkCheck(o.repo) && !definite(o.repo));
@@ -67,18 +68,21 @@ export async function checkLinks(urls: string[], fetchImpl: typeof fetch = fetch
 
 /** At most one finding per option; the first matching rule wins. */
 export function runChecks(targets: HandTarget[], generated: GeneratedTarget[], facts: Facts, links: Map<string, LinkStatus>): Finding[] {
-  const generatedById = new Map(generated.map((g) => [g.id, g.option]));
+  const generatedByKey = new Map(generated.map((g) => [targetKey(g), g.option]));
   const findings: Finding[] = [];
+  // Several files may describe one target; what they have already listed is shared.
+  const seen = new Map<string, { repos: Set<string>; packages: Set<string> }>();
 
   for (const t of targets) {
-    const seenRepos = new Set<string>();
-    const seenPackages = new Set<string>();
-    const gen = generatedById.get(t.id);
+    const key = targetKey(t);
+    if (!seen.has(key)) seen.set(key, { repos: new Set(), packages: new Set() });
+    const { repos: seenRepos, packages: seenPackages } = seen.get(key)!;
+    const gen = generatedByKey.get(key);
 
     t.options.forEach((o, option) => {
       const add = (check: Check, reason: string) => findings.push({ file: t.file, option, check, reason });
       const repo = o.repo ? norm(o.repo) : undefined;
-      const key = repoKey(o.repo);
+      const key = repoKey(effectiveRepo(t.target, o));
       const fact = key ? facts.get(key) : undefined;
       const known = fact && fact !== 'unknown' ? fact : undefined;
 
@@ -86,18 +90,18 @@ export function runChecks(targets: HandTarget[], generated: GeneratedTarget[], f
       // The Explorer is the source for OTel-owned options. A hand-written one for the same
       // repository is the interim copy, even if the path inside the repo has since moved.
       const repeatsGenerated =
-        gen && ((o.package && o.package === gen.package) || (repo && repo === norm(gen.repo)) || (o.tier === 'otel' && key && key === repoKey(gen.repo)));
+        gen && ((o.package && o.package === gen.package) || (repo && repo === norm(gen.repo)) || (o.tier === 'otel' && !!o.repo && repoKey(o.repo) === repoKey(gen.repo)));
       if (repo) seenRepos.add(repo);
       if (o.package) seenPackages.add(o.package);
 
       if (repeatsSibling) return add('duplicate', 'same repo or package as an earlier option of this target');
       if (repeatsGenerated) return add('duplicate', 'the Ecosystem Explorer already provides this option');
       if (known && !known.exists) return add('repo', `repository ${key} no longer exists`);
-      if (o.repo && !key && links.get(o.repo) === 'dead') return add('repo', `repository link does not resolve: ${o.repo}`);
+      if (o.repo && !repoKey(o.repo) && links.get(o.repo) === 'dead') return add('repo', `repository link does not resolve: ${o.repo}`);
       if (known?.archived) return add('abandoned', `repository ${key} is archived`);
       if (known && !known.license && !o.license) return add('licence', `no licence detected in ${key} and none declared`);
       if (o.docs && links.get(o.docs) === 'dead') return add('links', `docs link does not resolve: ${o.docs}`);
-      if (o.repo && key && links.get(o.repo) === 'dead') return add('links', `repo link does not resolve: ${o.repo}`);
+      if (o.repo && repoKey(o.repo) && links.get(o.repo) === 'dead') return add('links', `repo link does not resolve: ${o.repo}`);
     });
   }
   return findings;

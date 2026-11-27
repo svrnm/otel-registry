@@ -1,5 +1,4 @@
-name: Finch
+target: https://github.com/sneako/finch
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_finch
-    note: OpentelemetryFinch uses telemetry handlers to create OpenTelemetry spans from Finch events.

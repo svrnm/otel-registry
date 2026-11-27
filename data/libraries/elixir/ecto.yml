@@ -1,6 +1,0 @@
-name: Ecto
-options:
-  - tier: otel
-    repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_ecto
-    package: hex:opentelemetry_ecto
-    note: Instrumentation for Elixir database library Ecto.

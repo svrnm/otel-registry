@@ -1,4 +1,4 @@
-name: confluent-kafka-javascript
+target: https://github.com/confluentinc/confluent-kafka-javascript
 options:
   - tier: third-party
     repo: https://github.com/Drazke/instrumentation-confluent-kafka-javascript

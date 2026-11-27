@@ -1,5 +1,4 @@
-name: Microcks
+target: https://github.com/microcks/microcks
 options:
   - tier: native
-    repo: https://github.com/microcks/microcks
     docs: https://microcks.io/documentation/explanations/monitoring/

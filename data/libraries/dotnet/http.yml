@@ -1,3 +1,4 @@
+target: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient
 name: HttpClient
 options:
   - tier: native

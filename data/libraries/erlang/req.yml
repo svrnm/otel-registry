@@ -1,5 +1,4 @@
-name: Req
+target: https://github.com/wojtekmach/req
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_req
-    note: For details, see <https://hex.pm/packages/opentelemetry_req>.

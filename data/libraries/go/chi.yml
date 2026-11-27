@@ -1,4 +1,4 @@
-name: chi
+target: https://github.com/go-chi/chi
 options:
   - tier: third-party
     repo: https://github.com/riandyrn/otelchi

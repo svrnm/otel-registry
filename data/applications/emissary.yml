@@ -1,5 +1,4 @@
-name: Emissary Ingress
+target: https://github.com/emissary-ingress/emissary
 options:
   - tier: native
-    repo: https://github.com/emissary-ingress/emissary
     docs: https://emissary-ingress.dev/docs/3.10/howtos/dist-tracing/

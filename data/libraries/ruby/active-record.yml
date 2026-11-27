@@ -1,7 +1,7 @@
-name: active_record
+target: https://github.com/rails/rails/tree/main/activerecord
+name: Active Record
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-active_record/v0.13.0/instrumentation/active_record
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-active_record/0.13.0
     package: gem:opentelemetry-instrumentation-active_record
-    note: ActiveRecord instrumentation for the OpenTelemetry framework

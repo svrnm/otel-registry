@@ -1,6 +1,5 @@
-name: PSR-15 Middleware
+target: https://github.com/php-fig/http-server-middleware
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/Psr15
     package: packagist:open-telemetry/opentelemetry-auto-psr15
-    note: Instrumentation Library for PSR-15 middleware

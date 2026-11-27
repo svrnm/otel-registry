@@ -1,0 +1,2 @@
+# Which target an Ecosystem Explorer item instruments, where the Explorer does not say.
+dotnet/OpenTelemetry.Instrumentation.AspNetCore: https://github.com/dotnet/aspnetcore

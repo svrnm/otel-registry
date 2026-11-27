@@ -1,5 +1,4 @@
-name: MLflow
+target: https://github.com/mlflow/mlflow
 options:
   - tier: native
-    repo: https://github.com/mlflow/mlflow/
     docs: https://mlflow.org/docs/latest/llms/tracing/index.html

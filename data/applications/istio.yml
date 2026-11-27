@@ -1,5 +1,4 @@
-name: Istio
+target: https://github.com/istio/istio
 options:
   - tier: native
-    repo: https://github.com/istio/istio
     docs: https://istio.io/latest/docs/tasks/observability/distributed-tracing/opentelemetry/

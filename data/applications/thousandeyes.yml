@@ -1,6 +1,6 @@
+target: https://www.thousandeyes.com/
 name: ThousandEyes
 options:
   - tier: native
     docs: https://docs.thousandeyes.com/product-documentation/integration-guides/opentelemetry/
     license: proprietary
-    note: It allows you to export ThousandEyes telemetry data in OTel format.

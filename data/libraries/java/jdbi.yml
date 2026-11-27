@@ -1,4 +1,4 @@
-name: JDBI
+target: https://github.com/jdbi/jdbi
 options:
   - tier: first-party
     repo: https://github.com/jdbi/jdbi

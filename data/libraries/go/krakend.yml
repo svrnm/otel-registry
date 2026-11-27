@@ -1,4 +1,4 @@
-name: KrakenD API Gateway
+target: https://github.com/krakend/krakend-ce
 options:
   - tier: first-party
     repo: https://github.com/krakend/krakend-otel

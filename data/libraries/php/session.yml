@@ -1,5 +1,5 @@
-name: PHP Session
+target: https://www.php.net/manual/en/book.session.php
+name: Sessions
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/Session
-    note: This package provides auto-instrumentation for PHP's native session functions.

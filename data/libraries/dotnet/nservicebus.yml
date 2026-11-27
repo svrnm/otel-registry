@@ -1,7 +1,6 @@
-name: nservicebus
+target: https://github.com/Particular/NServiceBus
 options:
   - tier: native
-    repo: https://github.com/Particular/NServiceBus
     docs: https://docs.particular.net/nservicebus/operations/opentelemetry
     package: nuget:NServiceBus
     license: RPL-1.5

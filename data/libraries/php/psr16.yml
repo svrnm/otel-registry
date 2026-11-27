@@ -1,6 +1,5 @@
-name: PSR-16
+target: https://github.com/php-fig/simple-cache
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/Psr16
     package: packagist:open-telemetry/opentelemetry-auto-psr16
-    note: Auto-instrumentation hooks are registered via composer, and spans will automatically be created for each PSR-16 cache operation.

@@ -1,5 +1,4 @@
-name: Otterize network mapper
+target: https://github.com/otterize/network-mapper
 options:
   - tier: native
-    repo: https://github.com/otterize/network-mapper
     docs: https://docs.otterize.com/reference/network-mapper/helm-chart#opentelemetry-exporter-parameters

@@ -1,11 +1,8 @@
-name: OpenAI
+target: https://github.com/openai/openai-python
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-python-genai/tree/main/instrumentation/opentelemetry-instrumentation-genai-openai
-    note: This library allows tracing LLM requests and logging of messages made by the
   - tier: third-party
     repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-openai
-    note: Instrumentation for OpenAI LLMs (prompts logging, tokens, etc.)
   - tier: third-party
     repo: https://github.com/Arize-ai/openinference/tree/main/python/instrumentation/openinference-instrumentation-openai
-    note: Instrumentation for tracing the OpenAI Python SDK

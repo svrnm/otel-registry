@@ -1,5 +1,4 @@
-name: Phoenix
+target: https://github.com/phoenixframework/phoenix
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_phoenix
-    note: Telemetry handler that creates OpenTelemetry spans from Phoenix events.

@@ -1,13 +1,11 @@
-name: gRPC
+target: https://github.com/grpc/grpc-go
 options:
   - tier: first-party
     repo: https://github.com/grpc/grpc-go
     docs: https://grpc.io/docs/guides/opentelemetry-metrics/
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/tree/main/instrumentation/google.golang.org/grpc
-    note: Go compile-time auto-instrumentation plugin for the [`google.golang.org/grpc` package](https://pkg.go.dev/google.golang.org/grpc).
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation/google.golang.org/grpc
-    note: Go contrib plugin for Google's gRPC package.
   - tier: third-party
     repo: https://github.com/mahboubii/grpcmetrics

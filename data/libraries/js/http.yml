@@ -1,6 +1,6 @@
-name: HTTP
+target: https://nodejs.org/api/http.html
+name: Node.js http
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-http
     package: npm:@opentelemetry/instrumentation-http
-    note: HTTP and HTTPS instrumentation for Node.js.

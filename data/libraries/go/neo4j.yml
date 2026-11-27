@@ -1,4 +1,4 @@
-name: Neo4j Go Driver
+target: https://github.com/neo4j/neo4j-go-driver
 options:
   - tier: third-party
     repo: https://github.com/raito-io/neo4j-tracing

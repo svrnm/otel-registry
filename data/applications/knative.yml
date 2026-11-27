@@ -1,5 +1,4 @@
-name: Knative
+target: https://github.com/knative/eventing
 options:
   - tier: native
-    repo: https://github.com/knative/eventing
     docs: https://knative.dev/docs/eventing/observability/metrics/collecting-metrics/

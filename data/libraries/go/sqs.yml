@@ -1,4 +1,4 @@
-name: Amazon SQS
+target: https://github.com/aws/aws-sdk-go-v2
 options:
   - tier: third-party
     repo: https://github.com/udhos/opentelemetry-trace-sqs

@@ -1,7 +1,6 @@
-name: rdkafka
+target: https://github.com/karafka/rdkafka-ruby
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-rdkafka/v0.10.0/instrumentation/rdkafka
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-rdkafka/0.10.0
     package: gem:opentelemetry-instrumentation-rdkafka
-    note: Rdkafka instrumentation for the OpenTelemetry framework

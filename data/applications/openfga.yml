@@ -1,5 +1,4 @@
-name: OpenFGA
+target: https://github.com/openfga/openfga
 options:
   - tier: native
-    repo: https://github.com/openfga/openfga
     docs: https://openfga.dev/docs/getting-started/setup-openfga/configure-openfga#telemetry

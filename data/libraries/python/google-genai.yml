@@ -1,5 +1,4 @@
-name: Google GenAI SDK
+target: https://github.com/googleapis/python-genai
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-python-genai/tree/main/instrumentation/opentelemetry-instrumentation-google-genai
-    note: This library adds instrumentation to the `Google GenAI SDK library <https://pypi.org/project/google-genai/>`_

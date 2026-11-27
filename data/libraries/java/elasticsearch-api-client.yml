@@ -1,5 +1,4 @@
-name: Elasticsearch Java API Client
+target: https://github.com/elastic/elasticsearch-java
 options:
   - tier: native
-    repo: https://github.com/elastic/elasticsearch-java
     docs: https://www.elastic.co/docs/reference/elasticsearch/clients/java/setup/opentelemetry

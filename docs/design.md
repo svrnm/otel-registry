@@ -98,76 +98,83 @@ same JSON later, and the page can be deleted.
 
 ## Data model
 
-One file per target. The path is the identity; kind and language are read from
-it and not stored.
+Revised 2026-11-27 after the first prototype: entries were identified by file
+name, which let one library appear under several names, and the output repeated
+facts that follow from its links.
+
+One file per instrumented thing. An entry is identified by its **target**: the
+most specific stable link to what is instrumented. That is its own repository
+when it has one, otherwise its package, docs or product page. Files and
+Explorer items with the same target and language are one entry.
 
 ```
-libraries/<language>/<target>.yml
-applications/<target>.yml
+data/libraries/<language>/<file>.yml
+data/applications/<file>.yml
+data/explorer.yml
 ```
+
+The folder gives the language, or says it is an application. The file name
+carries no meaning.
 
 ```yaml
-# libraries/dotnet/aspnetcore.yml
-name: ASP.NET Core
+target: https://github.com/nestjs/nest
 options:
-  - tier: native
-    repo: https://github.com/dotnet/aspnetcore
-    docs: https://learn.microsoft.com/aspnet/core/log-mon/metrics/metrics
-    note: Emits traces and metrics natively since .NET 8.
-```
-
-```yaml
-# applications/traefik-proxy.yml
-name: Traefik Proxy
-options:
-  - tier: native
-    repo: https://github.com/traefik/traefik
-    docs: https://doc.traefik.io/traefik/observability/tracing/opentelemetry/
+  - tier: third-party
+    repo: https://github.com/pragmaticivan/nestjs-otel
 ```
 
 ### Hand-written fields
 
 | Field | Level | Required | Meaning |
 |---|---|---|---|
-| `name` | target | yes | Display name of the instrumented app or library |
+| `target` | file | yes | Link to what is instrumented |
+| `name` | file | only when the target is not a GitHub repository | What to call it |
 | `tier` | option | yes | `native`, `first-party`, `otel` or `third-party` |
-| `repo` | option | one of `repo` or `docs` | Source repository of this option |
-| `docs` | option | one of `repo` or `docs` | Page explaining how to enable telemetry |
-| `package` | option | no | `<ecosystem>:<name>`, for example `npm:@fastify/otel` |
-| `license` | option | no | SPDX identifier, or `proprietary`. Only needed when it cannot be detected |
-| `note` | option | no | One line shown with the option. Expected when `repo` points into a subdirectory of a shared repo, where the repo's own description says nothing about this option |
+| `repo` | option | one of `repo` or `docs`, except for `native` | Source repository of this option |
+| `docs` | option | one of `repo` or `docs`, except for `native` | Page explaining how to enable telemetry |
+| `package` | option | no | `<ecosystem>:<name>` |
+| `license` | option | no | SPDX identifier, or `proprietary`. Only when it cannot be detected |
 
-File names are lower-case and hyphenated. Unknown fields fail validation.
-Every link belongs to an option, so every check applies to one option.
+There are no titles, descriptions or notes: they mostly restated the name.
+Unknown fields fail validation.
 
 ### Tiers
 
-- **native**: the app or library itself emits OpenTelemetry telemetry.
+- **native**: the app or library itself emits OpenTelemetry telemetry. Needs
+  no `repo`, because it lives in the target.
 - **first-party**: a plugin or instrumentation library maintained by the
   project that owns the instrumented app or library.
 - **otel**: the option lives in the `open-telemetry` GitHub org.
 - **third-party**: everything else.
 
-Options are ordered by tier. Within a tier they are ordered alphabetically by
-package name, falling back to repo URL. Where several options in one tier are
-near-duplicates, the weaker ones are removed by hand, case by case.
+Options are ordered by tier, then alphabetically.
 
 ### Closed source
 
-Only `applications/` entries may be closed source. They give a `docs` link and
-`license: proprietary`. Library options must have a public repo.
+Only `applications/` entries may be closed source. Their target is the product
+page and their options give a `docs` link and `license: proprietary`.
+
+### Explorer items
+
+The Explorer lists OpenTelemetry-maintained instrumentation by package. Its
+Java data says what each one instruments; `data/explorer.yml` says it for the
+rest, as `<ecosystem>/<explorer name>: <target>`. An item with no known target
+is shown under its own repository until someone maps it.
+
+### Output
+
+`registry.json` carries facts only: `target`, `name` where one is needed,
+`language` or `category: application`, `cncf`, and per option `tier`, `repo`,
+`docs`, `package` and `license`. Headings, labels and maintainers are derived
+from the links where they are shown.
 
 ### Inferred at build time, never stored
 
 | Fact | Source |
 |---|---|
-| Licence | GitHub licence detection for the repo |
-| Maintainer | Repo owner |
-| Description | Repo description, unless a `note` is given |
+| Licence | GitHub licence detection for the option's repo, or the target for native support |
+| CNCF project and its level | The CNCF landscape file, matched by the target's repo or org |
 | Archived, moved or missing repo | GitHub |
-| CNCF project and its level | The CNCF landscape file, matched by repo or org |
-| OTel tier | Repo is under `open-telemetry` |
-| Date added | Git history of the file |
 
 ## Build
 

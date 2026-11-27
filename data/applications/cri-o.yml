@@ -1,5 +1,4 @@
-name: CRI-O
+target: https://github.com/cri-o/cri-o
 options:
   - tier: native
-    repo: https://github.com/cri-o/cri-o/
     docs: https://github.com/cri-o/cri-o/blob/main/docs/crio.conf.5.md#criotracing-table

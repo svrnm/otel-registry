@@ -1,5 +1,4 @@
-name: Elasticsearch
+target: https://github.com/elastic/elasticsearch-js
 options:
   - tier: third-party
     repo: https://github.com/aspecto-io/opentelemetry-ext-js/tree/master/packages/instrumentation-elasticsearch
-    note: Elasticsearch instrumentation for Node.js.

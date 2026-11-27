@@ -1,7 +1,6 @@
-name: active_model_serializers
+target: https://github.com/rails-api/active_model_serializers
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-active_model_serializers/v0.25.0/instrumentation/active_model_serializers
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-active_model_serializers/0.25.0
     package: gem:opentelemetry-instrumentation-active_model_serializers
-    note: Active Model Serializers instrumentation for the OpenTelemetry framework

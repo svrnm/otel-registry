@@ -1,5 +1,5 @@
+target: https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/otel-webserver-module
 name: Webserver Module
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/otel-webserver-module
-    note: The OTel web server module comprises of both Apache HTTP Server and NGINX instrumentation.

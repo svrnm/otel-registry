@@ -1,5 +1,4 @@
-name: Oban
+target: https://github.com/oban-bg/oban
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_oban
-    note: OpentelemetryOban uses telemetry handlers to create OpenTelemetry spans from Oban events.

@@ -1,13 +1,16 @@
 ---
 // One card per instrumented app or library: the best option first, the rest under "Also available".
-// Markup and classes follow opentelemetry.io's registry card so the page reads as a copy.
+// Markup and classes follow opentelemetry.io's registry card. Headings, labels and maintainers are
+// derived from the links here; the data does not repeat them.
 import type { RegistryEntry, RegistryOption } from '../registry/merge.ts';
+import { githubRepo, heading, optionLabel, ownerOf } from '../registry/display.ts';
 
 interface Props {
   entry: RegistryEntry;
+  index: number;
   languageName: (id: string) => string;
 }
-const { entry, languageName } = Astro.props;
+const { entry, index, languageName } = Astro.props;
 const [first, ...rest] = entry.options;
 
 const PACKAGES: Record<string, { url: string; icon: string }> = {
@@ -21,11 +24,11 @@ const PACKAGES: Record<string, { url: string; icon: string }> = {
   crates: { url: 'https://crates.io/crates/', icon: 'fab fa-rust' },
   maven: { url: 'https://maven.org/artifact/', icon: 'fa-solid fa-feather' },
 };
-const TIER: Record<string, { text: string; badge: string; icon?: string }> = {
+const TIER: Record<string, { text: string; badge: string; icon: string }> = {
   native: { text: 'native', badge: 'text-bg-success', icon: 'fa-solid fa-puzzle-piece' },
   'first-party': { text: 'first party integration', badge: 'text-bg-success', icon: 'fa-solid fa-heart' },
   otel: { text: 'OpenTelemetry', badge: 'text-bg-primary', icon: 'fa-solid fa-binoculars' },
-  'third-party': { text: 'third party', badge: 'text-bg-secondary', icon: 'fa-solid fa-people-group' },
+  'third-party': { text: 'third party', badge: 'text-bg-light border', icon: 'fa-solid fa-people-group' },
 };
 const COLOURED = ['cpp', 'dotnet', 'erlang', 'elixir', 'go', 'java', 'js', 'lua', 'php', 'python', 'ruby', 'rust', 'swift'];
 
@@ -35,46 +38,48 @@ const pkg = (o: RegistryOption) => {
   const known = PACKAGES[ecosystem];
   return known ? { href: known.url + name.join(':'), icon: known.icon, ecosystem } : undefined;
 };
-const primary = (o: RegistryOption) => o.repo ?? o.docs!;
+// Native support lives in the target itself.
+const repoOf = (o: RegistryOption) => o.repo ?? (o.tier === 'native' && githubRepo(entry.target) ? entry.target : undefined);
+const linkOf = (o: RegistryOption) => o.repo ?? o.docs ?? entry.target;
 const repoIcon = (url: string) => (url.startsWith('https://github.com/') ? 'fa-brands fa-github' : 'fab fa-git-alt');
 const highlight = first.tier === 'native' || first.tier === 'first-party' ? 'border-success' : '';
 const firstPkg = pkg(first);
+const firstRepo = repoOf(first);
+const owner = ownerOf(firstRepo);
 ---
 
 <li
   class:list={['card my-3 registry-entry', highlight]}
-  data-id={entry.id}
-  data-kind={entry.kind}
+  data-index={index}
+  data-kind={entry.category ?? 'library'}
   data-language={entry.language ?? ''}
   data-tiers={[...new Set(entry.options.map((o) => o.tier))].join(' ')}
 >
   <div class="card-body container">
     <h4 class="card-title mb-0 d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-2">
-      <a href={primary(first)} target="_blank" rel="noopener" class="me-auto">{entry.name}</a>
+      <a href={entry.target} target="_blank" rel="noopener" class="me-auto">{heading(entry)}</a>
       <div class="d-flex flex-wrap gap-1 justify-content-sm-end">
         <a href={`?tier=${first.tier}`} class:list={['badge rounded-pill', TIER[first.tier].badge]} title={`Click to filter by ${TIER[first.tier].text}`}>
           <i class={TIER[first.tier].icon}></i> {TIER[first.tier].text}
         </a>
-        {first.cncf && (
-          <span class="badge rounded-pill text-bg-primary" title={`CNCF ${first.cncf} project`}>CNCF {first.cncf}</span>
-        )}
+        {entry.cncf && <span class="badge rounded-pill text-bg-primary" title={`CNCF ${entry.cncf} project`}>CNCF {entry.cncf}</span>}
       </div>
     </h4>
-    <p class="card-text">
-      <small class="text-body-secondary">
-        by{" "}
-        {first.tier === 'otel' ? (
-          <span class="badge rounded-pill text-bg-primary">🔭 OpenTelemetry Authors 🔭</span>
-        ) : first.maintainer ? (
-          <a href={`https://github.com/${first.maintainer}`} target="_blank" rel="noopener" class="card-link">{first.maintainer}</a>
-        ) : (
-          <span>the vendor</span>
-        )}
-      </small>
-    </p>
     <div class="row p-2">
       <div class="col col-md-9 col-lg-10">
-        <div class="mb-3">{first.description ?? ''}</div>
+        <p class="card-text mb-2">
+          <span class="fw-semibold">{first.tier === 'native' && !first.repo ? 'Built in' : optionLabel(first)}</span>
+          <small class="text-body-secondary ms-1">
+            by{' '}
+            {first.tier === 'otel' ? (
+              <span class="badge rounded-pill text-bg-primary">🔭 OpenTelemetry Authors 🔭</span>
+            ) : owner ? (
+              <a href={`https://github.com/${owner}`} target="_blank" rel="noopener" class="card-link">{owner}</a>
+            ) : (
+              <span>the vendor</span>
+            )}
+          </small>
+        </p>
         {rest.length > 0 && (
           <div class="also mb-2">
             <h6><i class="fa-solid fa-layer-group"></i> Also available</h6>
@@ -82,7 +87,7 @@ const firstPkg = pkg(first);
               {rest.map((o) => (
                 <li>
                   <span class:list={['badge rounded-pill me-1', TIER[o.tier].badge]}>{TIER[o.tier].text}</span>
-                  <a href={primary(o)} target="_blank" rel="noopener">{o.label}</a>
+                  <a href={linkOf(o)} target="_blank" rel="noopener">{optionLabel(o)}</a>
                   {o.license && <small class="text-body-secondary ms-1">{o.license}</small>}
                   {o.docs && o.repo && (
                     <a href={o.docs} target="_blank" rel="noopener" class="ms-2 small"><i class="fas fa-book" aria-hidden="true"></i> docs</a>
@@ -124,8 +129,8 @@ const firstPkg = pkg(first);
     {firstPkg && (
       <a href={firstPkg.href} target="_blank" rel="noopener" class="card-link"><i class={firstPkg.icon} aria-hidden="true"></i>&nbsp;Package Details ({firstPkg.ecosystem})</a>
     )}
-    {first.repo && (
-      <a href={first.repo} target="_blank" rel="noopener" class="card-link"><i class={repoIcon(first.repo)} aria-hidden="true"></i>&nbsp;Repository</a>
+    {firstRepo && (
+      <a href={firstRepo} target="_blank" rel="noopener" class="card-link"><i class={repoIcon(firstRepo)} aria-hidden="true"></i>&nbsp;Repository</a>
     )}
   </div>
 </li>

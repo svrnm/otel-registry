@@ -1,7 +1,6 @@
-name: rails
+target: https://github.com/rails/rails
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-rails/v0.42.0/instrumentation/rails
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-rails/0.42.0
     package: gem:opentelemetry-instrumentation-rails
-    note: Rails instrumentation for the OpenTelemetry framework

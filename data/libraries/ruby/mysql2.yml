@@ -1,7 +1,6 @@
-name: mysql2
+target: https://github.com/brianmario/mysql2
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-mysql2/v0.34.0/instrumentation/mysql2
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-mysql2/0.34.0
     package: gem:opentelemetry-instrumentation-mysql2
-    note: Mysql2 instrumentation for the OpenTelemetry framework

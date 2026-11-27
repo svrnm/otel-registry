@@ -1,7 +1,6 @@
-name: excon
+target: https://github.com/excon/excon
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-excon/v0.29.1/instrumentation/excon
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-excon/0.29.1
     package: gem:opentelemetry-instrumentation-excon
-    note: Excon instrumentation for the OpenTelemetry framework

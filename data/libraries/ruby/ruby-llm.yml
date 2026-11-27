@@ -1,4 +1,4 @@
-name: ruby_llm
+target: https://github.com/crmne/ruby_llm
 options:
   - tier: third-party
     repo: https://github.com/thoughtbot/opentelemetry-instrumentation-ruby_llm

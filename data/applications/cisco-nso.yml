@@ -1,6 +1,6 @@
+target: https://www.cisco.com/c/en/us/products/cloud-systems-management/network-services-orchestrator/index.html
 name: Cisco Network Services Orchestrator (NSO)
 options:
   - tier: first-party
     docs: https://developer.cisco.com/docs/nso/observability-exporter/
     license: proprietary
-    note: The NSO Observability Exporter supports export of progress traces using OTLP.

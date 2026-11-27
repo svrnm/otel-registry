@@ -1,4 +1,4 @@
-name: IBM/sarama
+target: https://github.com/IBM/sarama
 options:
   - tier: third-party
     repo: https://github.com/dnwe/otelsarama

@@ -1,5 +1,4 @@
-name: Kuma
+target: https://github.com/kumahq/kuma
 options:
   - tier: native
-    repo: https://github.com/kumahq/kuma
     docs: https://kuma.io/docs/2.7.x/guides/otel-metrics/

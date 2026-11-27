@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -25,12 +25,15 @@ test('build without token exits 0, keeps all options, reports no findings', () =
   assert.equal(b.status, 0, b.output);
   const registry = b.read('registry.json');
   assert.equal(registry.length, 10); // 9 generated targets, one shared with a file, plus one application
-  const aspnet = registry.find((e: any) => e.id === 'libraries/dotnet/aspnetcore');
+  const aspnet = registry.find((e: any) => e.target === 'https://github.com/dotnet/aspnetcore');
   assert.deepEqual(aspnet.options.map((o: any) => o.tier), ['native', 'otel']);
-  assert.equal(aspnet.name, 'ASP.NET Core');
+  assert.deepEqual(Object.keys(aspnet).sort(), ['language', 'options', 'target']);
   const report = b.read('report.json');
   assert.equal(report.tokenUsed, false);
   assert.deepEqual(report.findings, []);
+  // Items the Explorer does not say a target for, and data/explorer.yml does not map.
+  assert.equal(report.unmapped.includes('javascript/instrumentation-winston'), true);
+  assert.equal(report.unmapped.includes('dotnet/OpenTelemetry.Instrumentation.AspNetCore'), false);
 });
 
 test('build reports a duplicate but exits 0 when no --changed file is affected', () => {
@@ -55,4 +58,15 @@ test('the report lists options that could not be checked', () => {
   const b = build('data');
   // No token: every GitHub-backed option is unknown.
   assert.deepEqual(b.read('report.json').unknown, ['applications/traefik-proxy.yml#0', 'libraries/dotnet/aspnetcore.yml#0']);
+});
+
+test('a finding the tracking issue already lists does not fail the check; a new one still does', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'baseline-'));
+  const known = { 'libraries/js/x.yml#1': { since: '2026-11-01', check: 'duplicate', reason: 'same repo or package as an earlier option of this target' } };
+  writeFileSync(join(dir, 'known.md'), `<!-- marks\n${JSON.stringify(known)}\n-->`);
+  writeFileSync(join(dir, 'other.md'), `<!-- marks\n${JSON.stringify({ 'libraries/js/y.yml#0': known['libraries/js/x.yml#1'] })}\n-->`);
+  const changed = ['--changed', 'libraries/js/x.yml'];
+  assert.equal(build('dup-data', ['--baseline', join(dir, 'known.md'), ...changed]).status, 0);
+  assert.equal(build('dup-data', ['--baseline', join(dir, 'other.md'), ...changed]).status, 2);
+  assert.equal(build('dup-data', ['--baseline', join(dir, 'missing.md'), ...changed]).status, 2);
 });

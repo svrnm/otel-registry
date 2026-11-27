@@ -1,6 +1,5 @@
-name: Remix
+target: https://github.com/remix-run/remix
 options:
   - tier: third-party
     repo: https://github.com/justindsmith/opentelemetry-instrumentations-js/tree/main/packages/instrumentation-remix
     package: npm:opentelemetry-instrumentation-remix
-    note: Remix instrumentation for Node.js.

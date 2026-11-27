@@ -1,5 +1,4 @@
-name: Replicate
+target: https://github.com/replicate/replicate-python
 options:
   - tier: third-party
     repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-replicate
-    note: Instrumentation for Replicate LLMs (prompts logging, tokens, etc.)

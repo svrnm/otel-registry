@@ -1,5 +1,0 @@
-name: Phoenix
-options:
-  - tier: otel
-    repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_phoenix
-    note: Instrumentation for Elixir web framework Phoenix.

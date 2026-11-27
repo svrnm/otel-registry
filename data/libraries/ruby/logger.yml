@@ -1,7 +1,6 @@
-name: logger
+target: https://github.com/ruby/logger
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-logger/v0.4.0/instrumentation/logger
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-logger/0.4.0
     package: gem:opentelemetry-instrumentation-logger
-    note: Logger instrumentation for the OpenTelemetry framework

@@ -1,5 +1,4 @@
-name: IBM MQ
+target: https://github.com/ibm-messaging/mq-golang
 options:
   - tier: first-party
     repo: https://github.com/ibm-messaging/mq-metric-samples/tree/master/cmd/mq_otel
-    note: This package extracts metrics from an IBM MQ queue manager and forwards them to an OpenTelemetry environment.

@@ -1,4 +1,4 @@
-name: Twig
+target: https://github.com/twigphp/Twig
 options:
   - tier: third-party
     repo: https://github.com/cmelius/opentelemetry-auto-twig/tree/main

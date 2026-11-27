@@ -1,5 +1,4 @@
-name: Backstage
+target: https://github.com/backstage/backstage
 options:
   - tier: native
-    repo: https://github.com/backstage/backstage
     docs: https://backstage.io/docs/tutorials/setup-opentelemetry

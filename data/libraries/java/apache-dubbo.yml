@@ -1,4 +1,4 @@
-name: Apache Dubbo
+target: https://github.com/apache/dubbo
 options:
   - tier: first-party
     repo: https://github.com/apache/dubbo

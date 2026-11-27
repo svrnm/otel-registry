@@ -1,4 +1,4 @@
-name: MSSQL
+target: https://github.com/tediousjs/node-mssql
 options:
   - tier: third-party
     repo: https://github.com/mnadeem/opentelemetry-instrumentation-mssql
