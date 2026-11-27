@@ -1,4 +1,4 @@
-name: Trillium
+target: https://github.com/trillium-rs/trillium
 options:
   - tier: first-party
     repo: https://github.com/trillium-rs/trillium-opentelemetry

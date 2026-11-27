@@ -1,5 +1,4 @@
-name: Qdrant
+target: https://github.com/qdrant/qdrant-client
 options:
   - tier: third-party
     repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-qdrant
-    note: Instrumentation for Qdrant Vector DB

@@ -1,5 +1,4 @@
-name: AWS SDK for Go
+target: https://github.com/aws/aws-sdk-go-v2
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation/github.com/aws/aws-sdk-go-v2/otelaws
-    note: AWS SDK V2 for Go instrumentation

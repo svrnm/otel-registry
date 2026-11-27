@@ -1,5 +1,4 @@
-name: Azure SDK
+target: https://github.com/Azure/azure-sdk-for-java
 options:
   - tier: first-party
     repo: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/core/azure-core-tracing-opentelemetry
-    note: Instrumentation for Azure SDK for Java (Track 2 libraries).

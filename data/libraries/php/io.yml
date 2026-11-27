@@ -1,6 +1,6 @@
-name: IO
+target: https://www.php.net/manual/en/book.filesystem.php
+name: File I/O
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/IO
     package: packagist:open-telemetry/opentelemetry-auto-io
-    note: Instrumentation Library for PHP IO

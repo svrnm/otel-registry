@@ -1,11 +1,9 @@
-name: Gin
+target: https://github.com/gin-gonic/gin
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/tree/main/instrumentation/github.com/gin-gonic/gin
-    note: Go compile-time auto-instrumentation plugin for the [`gin-gonic/gin` package](https://pkg.go.dev/github.com/gin-gonic/gin).
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation/github.com/gin-gonic/gin
-    note: Go contrib plugin for the gin-gonic/gin package.
   - tier: third-party
     repo: https://github.com/Cyprinus12138/otelgin
     docs: https://pkg.go.dev/github.com/Cyprinus12138/otelgin

@@ -1,7 +1,7 @@
-name: action_pack
+target: https://github.com/rails/rails/tree/main/actionpack
+name: Action Pack
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-action_pack/v0.18.0/instrumentation/action_pack
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-action_pack/0.18.0
     package: gem:opentelemetry-instrumentation-action_pack
-    note: ActionPack instrumentation for the OpenTelemetry framework

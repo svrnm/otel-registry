@@ -1,5 +1,5 @@
-name: Extension Kotlin
+target: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/opentelemetry-extension-kotlin-1.0
+name: OpenTelemetry Extension Kotlin
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/opentelemetry-extension-kotlin-1.0
-    note: Instrumentation for opentelemetry-extension-kotlin

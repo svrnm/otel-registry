@@ -1,5 +1,4 @@
-name: HTTPoison
+target: https://github.com/edgurgel/httpoison
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_httpoison
-    note: OpentelemetryHTTPoison is an Instrumentation Library for HTTPoison.

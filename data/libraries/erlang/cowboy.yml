@@ -1,5 +1,4 @@
-name: Cowboy
+target: https://github.com/ninenines/cowboy
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_cowboy
-    note: Instrumentation for Erlang HTTP server Cowboy.

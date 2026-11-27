@@ -1,7 +1,6 @@
-name: httpx
+target: https://github.com/HoneyryderChuck/httpx
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-httpx/v0.8.0/instrumentation/http
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-httpx/0.8.0
     package: gem:opentelemetry-instrumentation-httpx
-    note: HTTPX instrumentation for the OpenTelemetry framework

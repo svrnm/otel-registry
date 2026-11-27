@@ -1,11 +1,8 @@
-name: LangChain
+target: https://github.com/langchain-ai/langchain
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-python-genai/tree/main/instrumentation/opentelemetry-instrumentation-genai-langchain
-    note: This library traces `LangChain <https://pypi.org/project/langchain/>`_ and
   - tier: third-party
     repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-langchain
-    note: Instrumentation for LangChain Framework
   - tier: third-party
     repo: https://github.com/Arize-ai/openinference/tree/main/python/instrumentation/openinference-instrumentation-langchain
-    note: Instrumentation for tracing the LangChain framework

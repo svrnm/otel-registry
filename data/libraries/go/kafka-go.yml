@@ -1,8 +1,7 @@
-name: segmentio/kafka-go
+target: https://github.com/segmentio/kafka-go
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/tree/main/instrumentation/github.com/segmentio/kafka-go
-    note: Go compile-time auto-instrumentation plugin for the [`segmentio/kafka-go` package](https://pkg.go.dev/github.com/segmentio/kafka-go).
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-go-instrumentation/
     docs: https://github.com/open-telemetry/opentelemetry-go-instrumentation/blob/main/COMPATIBILITY.md#githubcomsegmentiokafka-go

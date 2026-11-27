@@ -1,4 +1,4 @@
-name: Echo
+target: https://github.com/labstack/echo
 options:
   - tier: third-party
-    repo: https://github.com/labstack/echo-opentelemetry
+    repo: https://github.com/labstack/echo-otel

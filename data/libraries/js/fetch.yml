@@ -1,6 +1,6 @@
-name: Fetch
+target: https://developer.mozilla.org/docs/Web/API/Fetch_API
+name: Fetch API
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-fetch
     package: npm:@opentelemetry/instrumentation-fetch
-    note: Fetch instrumentation for browsers.

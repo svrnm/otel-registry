@@ -1,5 +1,0 @@
-name: Nest
-options:
-  - tier: third-party
-    repo: https://github.com/MetinSeylan/Nestjs-OpenTelemetry
-    license: MIT

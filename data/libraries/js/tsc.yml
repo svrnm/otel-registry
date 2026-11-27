@@ -1,4 +1,4 @@
-name: TypeScript Compiler for Business Logic
+target: https://github.com/microsoft/TypeScript
 options:
   - tier: third-party
     repo: https://github.com/CeranaStudio/tsc-opentelemetry-instrumentation

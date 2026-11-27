@@ -1,5 +1,4 @@
-name: Pinecone
+target: https://github.com/pinecone-io/python-sdk
 options:
   - tier: third-party
     repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-pinecone
-    note: Instrumentation for Pinecone Vector DB

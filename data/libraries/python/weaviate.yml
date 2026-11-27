@@ -1,8 +1,6 @@
-name: Weaviate
+target: https://github.com/weaviate/weaviate-python-client
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-python-genai/tree/main/instrumentation/opentelemetry-instrumentation-genai-weaviate-client
-    note: This library provides OpenTelemetry instrumentation for the
   - tier: third-party
     repo: https://github.com/traceloop/openllmetry/tree/main/packages/opentelemetry-instrumentation-weaviate
-    note: Instrumentation for Weaviate Vector DB

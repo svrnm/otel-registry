@@ -1,4 +1,4 @@
-name: KafkaFlow
+target: https://github.com/Farfetch/kafkaflow
 options:
   - tier: first-party
     repo: https://github.com/Farfetch/kafkaflow

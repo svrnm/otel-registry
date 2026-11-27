@@ -1,4 +1,4 @@
-name: Mongoose
+target: https://github.com/Automattic/mongoose
 options:
   - tier: third-party
     repo: https://github.com/wdalmut/opentelemetry-plugin-mongoose

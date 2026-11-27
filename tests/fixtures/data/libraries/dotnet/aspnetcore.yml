@@ -1,6 +1,4 @@
-name: ASP.NET Core
+target: https://github.com/dotnet/aspnetcore
 options:
   - tier: native
-    repo: https://github.com/dotnet/aspnetcore
     docs: https://learn.microsoft.com/aspnet/core/log-mon/metrics/metrics
-    note: Emits traces and metrics natively since .NET 8.

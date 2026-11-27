@@ -7,7 +7,7 @@ import type { GeneratedTarget } from '../src/registry/explorer.ts';
 import type { Facts, RepoFacts } from '../src/registry/facts.ts';
 
 const lib = (id: string, ...options: HandOption[]): HandTarget => ({
-  id: `libraries/js/${id}`, file: `libraries/js/${id}.yml`, kind: 'library', language: 'js', name: id, options,
+  file: `libraries/js/${id}.yml`, kind: 'library', language: 'js', target: `https://github.com/lib/${id}`, options,
 });
 const ok = (over: Partial<RepoFacts> = {}): RepoFacts => ({ exists: true, archived: false, license: 'MIT', owner: 'acme', ...over });
 const facts = (entries: Record<string, RepoFacts | 'unknown'>): Facts => new Map(Object.entries(entries));
@@ -71,22 +71,24 @@ test('second option with the same repo or package is a duplicate', () => {
   assert.deepEqual(samePkg.map((x) => [x.option, x.check]), [[1, 'duplicate']]);
 });
 
-test('hand-written otel option duplicating the generated one is marked', () => {
+test('a hand-written otel option that is the Explorer\'s own package or link is a duplicate', () => {
   const generated: GeneratedTarget[] = [{
-    id: 'libraries/js/express', language: 'js', name: 'express',
+    ref: 'javascript/instrumentation-express', language: 'js', name: 'express', target: 'https://github.com/lib/express', known: true,
     option: { tier: 'otel', repo: 'https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-express', package: 'npm:@opentelemetry/instrumentation-express' },
   }];
+  const contrib = 'https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main';
   const hand = lib(
     'express',
-    opt({ tier: 'first-party', repo: 'https://github.com/expressjs/otel' }),
-    opt({ tier: 'otel', repo: 'https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-express' }),
+    opt({ tier: 'otel', repo: `${contrib}/plugins/node/old-path`, package: 'npm:@opentelemetry/instrumentation-express' }), // same package
+    opt({ tier: 'otel', repo: `${contrib}/packages/instrumentation-express/` }),                                              // same link
+    opt({ tier: 'otel', repo: `${contrib}/packages/instrumentation-express-extras` }),                                        // another package in that repo
   );
-  const f = runChecks([hand], generated, facts({ 'expressjs/otel': ok(), 'open-telemetry/opentelemetry-js-contrib': ok() }), noLinks);
-  assert.deepEqual(f.map((x) => [x.option, x.check]), [[1, 'duplicate']]);
+  const f = runChecks([hand], generated, facts({ 'open-telemetry/opentelemetry-js-contrib': ok() }), noLinks);
+  assert.deepEqual(f.map((x) => [x.option, x.check]), [[0, 'duplicate'], [1, 'duplicate']]);
 });
 
 test('a third-party option on a target the Explorer covers is not a duplicate', () => {
-  const generated: GeneratedTarget[] = [{ id: 'libraries/js/x', language: 'js', name: 'x', option: { tier: 'otel', repo: 'https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-x' } }];
+  const generated: GeneratedTarget[] = [{ ref: 'javascript/instrumentation-x', language: 'js', name: 'x', target: 'https://github.com/lib/x', known: true, option: { tier: 'otel', repo: 'https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-x' } }];
   assert.deepEqual(runChecks([lib('x', opt())], generated, facts({ 'acme/x': ok() }), noLinks), []);
 });
 
@@ -128,4 +130,23 @@ test('unknownOptions lists options whose facts or link status gave no definite a
   const f = facts({ 'acme/x': ok(), 'acme/b': 'unknown', 'acme/c': ok(), 'acme/d': ok(), 'acme/mono': ok() });
   const links = new Map<string, LinkStatus>([['https://d.example/c', 'unknown'], ['https://d.example/d', 'ok']]);
   assert.deepEqual(unknownOptions(targets, f, links), ['libraries/js/b.yml#0', 'libraries/js/c.yml#0', 'libraries/js/e.yml#0']);
+});
+
+test('a native option without its own repo is checked against the target', () => {
+  const t = lib('x', { tier: 'native' });
+  assert.equal(runChecks([t], [], facts({ 'lib/x': ok({ archived: true }) }), noLinks)[0].check, 'abandoned');
+  assert.deepEqual(runChecks([t], [], facts({ 'lib/x': ok() }), noLinks), []);
+});
+
+test('the same option in two files for one target is a duplicate in the second file', () => {
+  const a = lib('x', opt());
+  const b: HandTarget = { ...lib('x', opt()), file: 'libraries/js/x-again.yml' };
+  const f = runChecks([a, b], [], facts({ 'acme/x': ok() }), noLinks);
+  assert.deepEqual(f.map((x) => [x.file, x.option, x.check]), [['libraries/js/x-again.yml', 0, 'duplicate']]);
+});
+
+test('the same repo in a different language is not a duplicate', () => {
+  const a = lib('x', opt());
+  const b: HandTarget = { ...lib('x', opt()), file: 'libraries/python/x.yml', language: 'python' };
+  assert.deepEqual(runChecks([a, b], [], facts({ 'acme/x': ok() }), noLinks), []);
 });

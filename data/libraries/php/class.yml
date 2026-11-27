@@ -1,4 +1,4 @@
-name: Class
+target: https://github.com/eerzho/opentelemetry-auto-class
 options:
   - tier: third-party
     repo: https://github.com/eerzho/opentelemetry-auto-class

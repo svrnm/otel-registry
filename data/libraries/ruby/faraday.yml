@@ -1,7 +1,6 @@
-name: faraday
+target: https://github.com/lostisland/faraday
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-faraday/v0.33.0/instrumentation/faraday
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-faraday/0.33.0
     package: gem:opentelemetry-instrumentation-faraday
-    note: Faraday instrumentation for the OpenTelemetry framework

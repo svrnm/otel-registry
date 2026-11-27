@@ -1,4 +1,4 @@
-name: CloudWeGo Hertz
+target: https://github.com/cloudwego/hertz
 options:
   - tier: first-party
     repo: https://github.com/hertz-contrib/obs-opentelemetry

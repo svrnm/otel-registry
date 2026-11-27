@@ -1,6 +1,5 @@
-name: Guzzle
+target: https://github.com/guzzle/guzzle
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/Guzzle
     package: packagist:open-telemetry/opentelemetry-auto-guzzle
-    note: Instrumentation Library for Guzzle

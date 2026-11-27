@@ -1,3 +1,4 @@
+target: https://github.com/open-telemetry/opentelemetry-android/tree/main/instrumentation/activity
 name: Activity
 options:
   - tier: otel

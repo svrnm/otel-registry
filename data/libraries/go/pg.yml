@@ -1,5 +1,4 @@
-name: go-pg
+target: https://github.com/go-pg/pg
 options:
   - tier: first-party
     repo: https://github.com/go-pg/pg/tree/v10/extra/pgotel
-    note: Instrumentation for go-pg PostgreSQL client.

@@ -1,6 +1,5 @@
-name: WordPress
+target: https://github.com/WordPress/WordPress
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/Wordpress
     package: packagist:open-telemetry/opentelemetry-auto-wordpress
-    note: Instrumentation Library for WordPress

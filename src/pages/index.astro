@@ -45,8 +45,9 @@ const TIERS = [
       <h1>Registry</h1>
       <p class="lead">Find applications and libraries that you can get OpenTelemetry telemetry from.</p>
       <p>
-        Each entry is one instrumented application or library. Where there are several ways to instrument it, native support comes first,
-        then first-party integrations, then OpenTelemetry-maintained instrumentation, then third-party instrumentation.
+        Each entry is one instrumented application or library, named by where it lives. Where there are several ways to instrument it,
+        native support comes first, then first-party integrations, then OpenTelemetry-maintained instrumentation, then third-party
+        instrumentation.
       </p>
 
       <div class="pb-4">
@@ -85,15 +86,15 @@ const TIERS = [
       <div class="mx-auto">
         <p class="text-center text-body-secondary d-none" id="no-results">No entries match.</p>
         <ul class="list-unstyled" id="registry-list" data-source="/registry.json">
-          {entries.map((entry) => <Card entry={entry} languageName={languageName} />)}
+          {entries.map((entry, index) => <Card entry={entry} index={index} languageName={languageName} />)}
         </ul>
       </div>
 
       <hr class="my-5" />
       <h2 class="h4" id="add">Add or fix an entry</h2>
       <p>
-        An entry is one small YAML file: a name, a tier and a link. Licence, maintainer, description and CNCF status are read from the
-        repository when the site is built. Entries whose links die or whose repository is archived are hidden, and removed after 30 days.
+        An entry is one small YAML file: a link to what is instrumented, and for each way to instrument it a tier and a link.
+        Licence and CNCF status are read when the site is built. Entries whose links die or whose repository is archived are hidden, and removed after 30 days.
         See the <a href={`${REPO}#readme`}>README</a> for the format.
       </p>
     </main>

@@ -1,4 +1,4 @@
-name: Gqlgen
+target: https://github.com/99designs/gqlgen
 options:
   - tier: third-party
     repo: https://github.com/ravilushqa/otelgqlgen

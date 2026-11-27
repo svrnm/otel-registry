@@ -1,5 +1,4 @@
-name: OpenFeature flagd
+target: https://github.com/open-feature/flagd
 options:
   - tier: native
-    repo: https://github.com/open-feature/flagd
     docs: https://flagd.dev/reference/monitoring/#opentelemetry

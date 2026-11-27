@@ -1,4 +1,4 @@
-name: gRPC
+target: https://github.com/grpc/grpc-java
 options:
   - tier: first-party
     repo: https://github.com/grpc/grpc-java

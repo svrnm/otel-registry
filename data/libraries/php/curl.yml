@@ -1,6 +1,6 @@
-name: curl
+target: https://www.php.net/manual/en/book.curl.php
+name: cURL
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/Curl
     package: packagist:open-telemetry/opentelemetry-auto-curl
-    note: Auto-instrumentation hooks are registered via composer, and client kind spans will automatically be created when calling `curl_exec` or `curl_multi_exec` functions. Additionally, distributed tracing is supported by setting the `traceparent` header.

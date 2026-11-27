@@ -1,5 +1,4 @@
-name: Cloud Foundry
+target: https://github.com/cloudfoundry/cf-deployment
 options:
   - tier: native
-    repo: https://github.com/cloudfoundry/cf-deployment
     docs: https://github.com/cloudfoundry/cf-deployment/blob/main/operations/experimental/add-otel-collector.yml

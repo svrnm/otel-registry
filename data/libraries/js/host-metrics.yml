@@ -1,6 +1,6 @@
+target: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/host-metrics
 name: Host Metrics for Node.js
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/host-metrics
     package: npm:@opentelemetry/host-metrics
-    note: This module provides automatic collection of Host Metrics which includes metrics for CPU, memory, and network.

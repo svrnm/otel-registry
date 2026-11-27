@@ -1,4 +1,4 @@
-name: Jenkins
+target: https://github.com/jenkinsci/jenkins
 options:
   - tier: first-party
     repo: https://github.com/jenkinsci/opentelemetry-plugin/

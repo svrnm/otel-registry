@@ -1,6 +1,6 @@
+target: https://developer.mozilla.org/docs/Web/API/XMLHttpRequest
 name: XMLHttpRequest
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-xml-http-request
     package: npm:@opentelemetry/instrumentation-xml-http-request
-    note: XMLHttpRequest instrumentation for browsers.

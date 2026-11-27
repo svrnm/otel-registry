@@ -1,6 +1,6 @@
+target: https://geminicli.com/
 name: Google Gemini CLI
 options:
   - tier: native
     docs: https://geminicli.com/docs/cli/telemetry/#opentelemetry-integration
     license: proprietary
-    note: Gemini CLI brings the capabilities of Gemini models to your terminal in an interactive Read-Eval-Print Loop (REPL) environment.

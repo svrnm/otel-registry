@@ -1,5 +1,4 @@
-name: go-restful
+target: https://github.com/emicklei/go-restful
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation/github.com/emicklei/go-restful
-    note: Package go-restful provides functions to trace the emicklei/go-restful/v3 package.

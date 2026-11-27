@@ -1,8 +1,7 @@
-name: confluent-kafka-go
+target: https://github.com/confluentinc/confluent-kafka-go
 options:
   - tier: third-party
     repo: https://github.com/jurabek/otelkafka
     package: go:github.com/jurabek/otelkafka
   - tier: third-party
     repo: https://github.com/signalfx/splunk-otel-go/tree/main/instrumentation/github.com/confluentinc/confluent-kafka-go/v2/kafka/splunkkafka
-    note: Instrumentation for the `github.com/confluentinc/confluent-kafka-go/v2/kafka/splunkkafka` package.

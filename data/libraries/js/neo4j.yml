@@ -1,5 +1,4 @@
-name: Neo4j
+target: https://github.com/neo4j/neo4j-javascript-driver
 options:
   - tier: third-party
     repo: https://github.com/aspecto-io/opentelemetry-ext-js/tree/master/packages/instrumentation-neo4j
-    note: Neo4j instrumentation for Node.js.

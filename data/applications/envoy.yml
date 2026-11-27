@@ -1,5 +1,4 @@
-name: Envoy Proxy
+target: https://github.com/envoyproxy/envoy
 options:
   - tier: native
-    repo: https://github.com/envoyproxy/envoy
     docs: https://www.envoyproxy.io/docs/envoy/latest/start/sandboxes/opentelemetry

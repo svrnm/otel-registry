@@ -1,4 +1,4 @@
-name: Tide
+target: https://github.com/http-rs/tide
 options:
   - tier: third-party
     repo: https://github.com/asaaki/opentelemetry-tide

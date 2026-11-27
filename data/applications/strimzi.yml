@@ -1,5 +1,4 @@
-name: Strimzi
+target: https://github.com/strimzi/strimzi-kafka-operator
 options:
   - tier: native
-    repo: https://github.com/strimzi/strimzi-kafka-operator
     docs: https://strimzi.io/docs/operators/latest/deploying#assembly-distributed-tracing-str

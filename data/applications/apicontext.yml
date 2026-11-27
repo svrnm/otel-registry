@@ -1,6 +1,6 @@
+target: https://apicontext.com/
 name: APIContext
 options:
   - tier: native
     docs: https://docs.apimetrics.io/docs/export-with-opentelemetry
     license: proprietary
-    note: Send data from APIContext to any platform that intakes OpenTelemetry with our OpenTelemetry Webhook

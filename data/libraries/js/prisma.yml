@@ -1,6 +1,5 @@
-name: Prisma
+target: https://github.com/prisma/orm
 options:
   - tier: first-party
-    repo: https://github.com/prisma/prisma/tree/7.9.1/packages/instrumentation
+    repo: https://github.com/prisma/orm/tree/7.9.1/packages/instrumentation
     package: npm:@prisma/instrumentation
-    note: OpenTelemetry compliant tracing instrumentation for the Prisma ORM.

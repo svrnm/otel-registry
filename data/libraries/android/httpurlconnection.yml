@@ -1,3 +1,4 @@
+target: https://developer.android.com/reference/java/net/HttpURLConnection
 name: HttpURLConnection
 options:
   - tier: otel

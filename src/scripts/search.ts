@@ -1,6 +1,7 @@
 // Client-side search and filters for the registry page. The two pure functions are
 // exported for tests; everything touching the DOM runs only in a browser.
 import MiniSearch from 'minisearch';
+import { heading, optionLabel, ownerOf } from '../registry/display.ts';
 
 export interface Filters {
   s?: string;
@@ -46,17 +47,18 @@ function init() {
     if (!index) {
       const entries: any[] = await (await fetch(list.dataset.source!)).json();
       index = new MiniSearch({
-        fields: ['name', 'language', 'description', 'labels', 'maintainers'],
-        searchOptions: { prefix: true, fuzzy: 0.2, boost: { name: 4, labels: 2 }, combineWith: 'AND' },
+        fields: ['heading', 'target', 'language', 'labels', 'owners'],
+        searchOptions: { prefix: true, fuzzy: 0.2, boost: { heading: 4, target: 2, labels: 2 }, combineWith: 'AND' },
       });
       index.addAll(
-        entries.map((e) => ({
-          id: e.id,
-          name: e.name,
-          language: e.language ?? '',
-          description: e.options.map((o: any) => o.description ?? '').join(' '),
-          labels: e.options.map((o: any) => o.label).join(' '),
-          maintainers: e.options.map((o: any) => o.maintainer ?? '').join(' '),
+        // The registry has no ids; a card and its entry share a position.
+        entries.map((e, i) => ({
+          id: i,
+          heading: heading(e),
+          target: e.target.replace(/^https?:\/\//, ''),
+          language: e.language ?? 'application',
+          labels: e.options.map((o: any) => optionLabel(o)).join(' '),
+          owners: e.options.map((o: any) => ownerOf(o.repo) ?? '').join(' '),
         })),
       );
     }
@@ -70,12 +72,12 @@ function init() {
     for (const card of cards) {
       const visible =
         matches({ language: card.dataset.language || undefined, kind: card.dataset.kind!, tiers: card.dataset.tiers!.split(' ') }, filters) &&
-        (!rank || rank.has(card.dataset.id!));
+        (!rank || rank.has(card.dataset.index!));
       card.classList.toggle('d-none', !visible);
       if (visible) shown++;
     }
     // Best match first while searching, alphabetical otherwise.
-    const sorted = rank ? [...cards].sort((a, b) => (rank.get(a.dataset.id!) ?? Infinity) - (rank.get(b.dataset.id!) ?? Infinity)) : cards;
+    const sorted = rank ? [...cards].sort((a, b) => (rank.get(a.dataset.index!) ?? Infinity) - (rank.get(b.dataset.index!) ?? Infinity)) : cards;
     list.append(...sorted);
     count.textContent = `${shown} of ${cards.length} entries`;
     empty.classList.toggle('d-none', shown > 0);

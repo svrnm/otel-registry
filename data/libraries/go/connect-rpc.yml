@@ -1,4 +1,4 @@
-name: Connect RPC
+target: https://github.com/connectrpc/connect-go
 options:
   - tier: first-party
     repo: https://github.com/connectrpc/otelconnect-go

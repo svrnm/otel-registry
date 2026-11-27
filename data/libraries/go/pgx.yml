@@ -1,7 +1,6 @@
-name: pgx
+target: https://github.com/jackc/pgx
 options:
   - tier: third-party
     repo: https://github.com/exaring/otelpgx
   - tier: third-party
     repo: https://github.com/signalfx/splunk-otel-go/tree/main/instrumentation/github.com/jackc/pgx/splunkpgx
-    note: Instrumentation for the `github.com/jackc/pgx` package.

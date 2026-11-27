@@ -5,12 +5,21 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { load } from 'js-yaml';
+import { EXPLORER_MAP } from './targets.ts';
 
-export interface GeneratedTarget {
-  id: string;
+/** One OTel-owned instrumentation as the Explorer lists it. `link` is what the Explorer says it instruments. */
+export interface GeneratedItem {
+  ref: string; // '<ecosystem>/<explorer name>', the key used in data/explorer.yml
   language: string;
   name: string;
-  option: { tier: 'otel'; repo: string; package?: string; note?: string };
+  link?: string;
+  option: { tier: 'otel'; repo: string; package?: string };
+}
+
+/** An item with its target settled. `known` is false when nothing says what it instruments. */
+export interface GeneratedTarget extends GeneratedItem {
+  target: string;
+  known: boolean;
 }
 
 const EXPLORER_REPO = 'https://github.com/open-telemetry/opentelemetry-ecosystem-explorer';
@@ -27,7 +36,7 @@ const byVersion = (a: string, b: string) => a.localeCompare(b, undefined, { nume
 const list = (dir: string) => (existsSync(dir) ? readdirSync(dir) : []);
 const latest = (names: string[]) => names.filter((n) => /^v\d/.test(n)).sort(byVersion).pop();
 const yaml = (file: string) => load(readFileSync(file, 'utf8')) as any;
-const oneLine = (s: unknown) => (typeof s === 'string' && s.trim() ? s.trim().replace(/\s+/g, ' ') : undefined);
+const isUrl = (s: unknown): s is string => typeof s === 'string' && /^https?:\/\/\S+$/.test(s);
 
 function commonParent(paths: string[]): string {
   const parts = paths.map((p) => p.split('/'));
@@ -41,7 +50,7 @@ function commonParent(paths: string[]): string {
   return first.slice(0, n).join('/');
 }
 
-function java(dir: string): GeneratedTarget[] {
+function java(dir: string): GeneratedItem[] {
   const base = join(dir, 'java', 'javaagent');
   const version = latest(list(base));
   if (!version) return [];
@@ -51,39 +60,42 @@ function java(dir: string): GeneratedTarget[] {
     if (!m.display_name || !m.source_path) continue;
     groups.set(m.display_name, [...(groups.get(m.display_name) ?? []), m]);
   }
-  return [...groups].map(([name, ms]) => ({
-    id: `libraries/java/${slug(name)}`,
-    language: 'java',
-    name,
-    option: {
-      tier: 'otel' as const,
-      repo: `${GITHUB}/open-telemetry/opentelemetry-java-instrumentation/tree/main/${commonParent(ms.map((m) => m.source_path))}`,
-      note: oneLine(ms[0].description),
-    },
-  }));
+  return [...groups].map(([name, ms]) => {
+    const link = ms.map((m) => m.library_link).find(isUrl);
+    return {
+      ref: `java/${slug(name)}`,
+      language: 'java',
+      name,
+      ...(link ? { link } : {}),
+      option: {
+        tier: 'otel' as const,
+        repo: `${GITHUB}/open-telemetry/opentelemetry-java-instrumentation/tree/main/${commonParent(ms.map((m) => m.source_path))}`,
+      },
+    };
+  });
 }
 
 /** JavaScript and Python share a layout: <ecosystem>/<package>/<version>.yaml */
-function packages(dir: string, ecosystem: string, language: string, prefix: RegExp, pkg: (p: any) => string | undefined): GeneratedTarget[] {
+function packages(dir: string, ecosystem: string, language: string, prefix: RegExp, pkg: (p: any) => string | undefined): GeneratedItem[] {
   const base = join(dir, ecosystem);
-  const out: GeneratedTarget[] = [];
+  const out: GeneratedItem[] = [];
   for (const name of list(base)) {
     const version = latest(list(join(base, name)).map((f) => f.replace(/\.ya?ml$/, '')));
     if (!version) continue;
     const p = yaml(join(base, name, `${version}.yaml`));
     if (!p?.repository || !p?.source_path) continue;
-    const target = slug(name.replace(prefix, '')) || slug(name);
+    const packageName = pkg(p);
     out.push({
-      id: `libraries/${language}/${target}`,
+      ref: `${ecosystem}/${name}`,
       language,
-      name: target,
-      option: { tier: 'otel', repo: `${GITHUB}/${p.repository}/tree/main/${p.source_path}`, package: pkg(p), note: oneLine(p.description) },
+      name: name.replace(prefix, '') || name,
+      option: { tier: 'otel', repo: `${GITHUB}/${p.repository}/tree/main/${p.source_path}`, ...(packageName ? { package: packageName } : {}) },
     });
   }
   return out;
 }
 
-function dotnet(dir: string): GeneratedTarget[] {
+function dotnet(dir: string): GeneratedItem[] {
   const base = join(dir, 'dotnet');
   const version = latest(list(base));
   if (!version) return [];
@@ -92,19 +104,14 @@ function dotnet(dir: string): GeneratedTarget[] {
   return modules
     .filter((m) => typeof m.name === 'string' && m.name.startsWith(PREFIX))
     .map((m) => ({
-      id: `libraries/dotnet/${slug(m.name.slice(PREFIX.length))}`,
+      ref: `dotnet/${m.name}`,
       language: 'dotnet',
       name: m.name.slice(PREFIX.length),
-      option: {
-        tier: 'otel' as const,
-        repo: `${GITHUB}/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/${m.name}`,
-        package: `nuget:${m.name}`,
-        note: oneLine(m.description),
-      },
+      option: { tier: 'otel' as const, repo: `${GITHUB}/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/${m.name}`, package: `nuget:${m.name}` },
     }));
 }
 
-const ADAPTERS: Record<string, (dir: string) => GeneratedTarget[]> = {
+const ADAPTERS: Record<string, (dir: string) => GeneratedItem[]> = {
   java,
   javascript: (dir) =>
     packages(dir, 'javascript', 'js', /^instrumentation-|-instrumentation$/, (p) => (p.npm_package ? `npm:${p.npm_package}` : undefined)),
@@ -112,17 +119,38 @@ const ADAPTERS: Record<string, (dir: string) => GeneratedTarget[]> = {
   dotnet,
 };
 
-/** registryDir is <explorer checkout>/ecosystem-registry. Throws when an ecosystem yields no targets. */
-export function readExplorer(registryDir: string): GeneratedTarget[] {
-  const all: GeneratedTarget[] = [];
+/** registryDir is <explorer checkout>/ecosystem-registry. Throws when an ecosystem yields no items. */
+export function readExplorer(registryDir: string): GeneratedItem[] {
+  const all: GeneratedItem[] = [];
   for (const [ecosystem, adapter] of Object.entries(ADAPTERS)) {
-    const targets = adapter(registryDir);
-    if (targets.length === 0) {
-      throw new Error(`Ecosystem Explorer: no targets found for "${ecosystem}" in ${registryDir}. Its layout may have changed.`);
+    const items = adapter(registryDir);
+    if (items.length === 0) {
+      throw new Error(`Ecosystem Explorer: no items found for "${ecosystem}" in ${registryDir}. Its layout may have changed.`);
     }
-    all.push(...targets);
+    all.push(...items);
   }
-  return all.sort((a, b) => a.id.localeCompare(b.id));
+  return all.sort((a, b) => a.ref.localeCompare(b.ref));
+}
+
+/**
+ * data/explorer.yml: `<ref>: <target link>` for items where the Explorer does not say what
+ * they instrument, or says it differently from the entry they belong to. Empty when missing.
+ */
+export function readExplorerMap(dataDir: string): Map<string, string> {
+  const file = join(dataDir, EXPLORER_MAP);
+  if (!existsSync(file)) return new Map();
+  const raw = (load(readFileSync(file, 'utf8')) ?? {}) as Record<string, unknown>;
+  const bad = Object.entries(raw).filter(([, v]) => !isUrl(v)).map(([k]) => k);
+  if (bad.length) throw new Error(`${EXPLORER_MAP}: not an http(s) link for ${bad.join(', ')}`);
+  return new Map(Object.entries(raw) as [string, string][]);
+}
+
+/** The target of an item: the mapped link, else what the Explorer says, else the item's own repo. */
+export function resolveGenerated(items: GeneratedItem[], map: Map<string, string>): GeneratedTarget[] {
+  return items.map((item) => {
+    const target = map.get(item.ref) ?? item.link;
+    return { ...item, target: target ?? item.option.repo, known: !!target };
+  });
 }
 
 /** Shallow-clones the Explorer repo into cacheDir and returns its ecosystem-registry path. Throws on failure. */

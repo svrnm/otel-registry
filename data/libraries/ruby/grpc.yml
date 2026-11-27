@@ -1,7 +1,6 @@
-name: grpc
+target: https://github.com/grpc/grpc
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-grpc/v0.5.2/instrumentation/grpc
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-grpc/0.5.2
     package: gem:opentelemetry-instrumentation-grpc
-    note: gRPC instrumentation for the OpenTelemetry framework

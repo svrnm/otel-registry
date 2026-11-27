@@ -1,6 +1,6 @@
+target: https://konghq.com/products/kong-mesh
 name: Kong Mesh
 options:
   - tier: native
     docs: https://docs.konghq.com/mesh/latest/guides/otel-metrics/
     license: proprietary
-    note: Kong Mesh provides integration with OpenTelemetry.

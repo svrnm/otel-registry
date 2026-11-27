@@ -1,5 +1,4 @@
-name: AWS SDK
+target: https://github.com/aws/aws-sdk-php
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/AwsSdk
-    note: This package provides auto-instrumentation for the AWS SDK for PHP.

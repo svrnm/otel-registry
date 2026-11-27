@@ -1,4 +1,4 @@
-name: Broken
+target: https://github.com/a/b
 options:
   - tier: gold
     repo: https://github.com/a/b

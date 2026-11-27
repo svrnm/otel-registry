@@ -1,5 +1,4 @@
-name: Sequelize
+target: https://github.com/sequelize/sequelize
 options:
   - tier: third-party
     repo: https://github.com/aspecto-io/opentelemetry-ext-js/tree/master/packages/instrumentation-sequelize
-    note: Sequelize instrumentation for Node.js.

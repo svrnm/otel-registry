@@ -1,5 +1,4 @@
-name: Elli
+target: https://github.com/elli-lib/elli
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_elli
-    note: Instrumentation for Erlang HTTP server Elli.

@@ -1,7 +1,7 @@
-name: active_support
+target: https://github.com/rails/rails/tree/main/activesupport
+name: Active Support
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-active_support/v0.12.0/instrumentation/active_support
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-active_support/0.12.0
     package: gem:opentelemetry-instrumentation-active_support
-    note: ActiveSupport instrumentation for the OpenTelemetry framework

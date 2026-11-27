@@ -1,5 +1,4 @@
-name: CsvPath Framework
+target: https://github.com/csvpath/csvpath
 options:
   - tier: native
-    repo: https://github.com/csvpath/csvpath
     docs: https://www.csvpath.org/getting-started/dataops-integrations/getting-started-with-csvpath-+-opentelemetry

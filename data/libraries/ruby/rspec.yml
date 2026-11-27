@@ -1,7 +1,6 @@
-name: rspec
+target: https://github.com/rspec/rspec
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-rspec/v0.8.0/instrumentation/rspec
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-rspec/0.8.0
     package: gem:opentelemetry-instrumentation-rspec
-    note: Rspec instrumentation for the OpenTelemetry framework

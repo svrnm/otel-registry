@@ -1,4 +1,4 @@
-name: BullMQ
+target: https://github.com/taskforcesh/bullmq
 options:
   - tier: third-party
     repo: https://github.com/jenniferplusplus/opentelemetry-instrumentation-bullmq

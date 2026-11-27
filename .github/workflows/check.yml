@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: read
+  issues: read
 
 jobs:
   check:
@@ -20,11 +21,17 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
-      - name: Check entries (a finding in a changed file fails the pull request)
+      # Options that are already marked and tracked do not block someone editing the same file.
+      - name: Read what the tracking issue already lists
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh issue list --state open --search '"Marked entries" in:title author:app/github-actions' --json body --jq '.[0].body // ""' > "$RUNNER_TEMP/marked.md"
+      - name: Check entries (a new finding in a changed file fails the pull request)
         env:
           GITHUB_TOKEN: ${{ github.token }}
           BASE_REF: ${{ github.base_ref }}
         run: |
           git diff --name-only -z --diff-filter=AM "origin/$BASE_REF...HEAD" -- data \
-            | xargs -0 npm run data -- --changed
+            | xargs -0 npm run data -- --baseline "$RUNNER_TEMP/marked.md" --changed
       - run: npx astro build

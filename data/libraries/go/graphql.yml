@@ -1,5 +1,4 @@
-name: graphql-go
+target: https://github.com/graph-gophers/graphql-go
 options:
   - tier: third-party
     repo: https://github.com/uptrace/opentelemetry-go-extra/tree/main/otelgraphql
-    note: Instrumentation for graphql-go GraphQL Server that records GraphQL operations using OpenTelemetry Tracing API.

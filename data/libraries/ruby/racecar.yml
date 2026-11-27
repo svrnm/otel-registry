@@ -1,7 +1,6 @@
-name: racecar
+target: https://github.com/zendesk/racecar
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-racecar/v0.7.0/instrumentation/racecar
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-racecar/0.7.0
     package: gem:opentelemetry-instrumentation-racecar
-    note: Racecar instrumentation for the OpenTelemetry framework

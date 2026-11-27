@@ -1,7 +1,6 @@
-name: net_http
+target: https://github.com/ruby/net-http
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/opentelemetry-instrumentation-net_http/v0.29.0/instrumentation/net_http
     docs: https://rubydoc.info/gems/opentelemetry-instrumentation-net_http/0.29.0
     package: gem:opentelemetry-instrumentation-net_http
-    note: Net::HTTP instrumentation for the OpenTelemetry framework

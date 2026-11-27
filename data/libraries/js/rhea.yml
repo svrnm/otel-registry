@@ -1,4 +1,4 @@
-name: rhea
+target: https://github.com/amqp/rhea
 options:
   - tier: third-party
     repo: https://github.com/bartoval/opentelemetry-instrumentation-rhea

@@ -1,4 +1,4 @@
-name: Resty
+target: https://github.com/go-resty/resty
 options:
   - tier: third-party
     repo: https://github.com/dubonzi/otelresty

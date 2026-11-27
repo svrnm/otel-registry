@@ -1,4 +1,4 @@
-name: TraceVerde
+target: https://github.com/Mandark-droid/genai_otel_instrument
 options:
   - tier: third-party
     repo: https://github.com/Mandark-droid/genai_otel_instrument

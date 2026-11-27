@@ -1,5 +1,4 @@
-name: gRPC
+target: https://github.com/elixir-grpc/grpc
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-erlang-contrib/tree/main/instrumentation/opentelemetry_grpc
-    note: OpenTelemetry instrumentation for gRPC clients and servers in Elixir, enabling distributed tracing, error tracking, and context propagation across services.

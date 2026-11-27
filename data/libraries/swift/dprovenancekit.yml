@@ -1,4 +1,4 @@
-name: DProvenanceKit
+target: https://github.com/Therealdk8890/DProvenanceKit
 options:
   - tier: third-party
     repo: https://github.com/Therealdk8890/DProvenanceKit

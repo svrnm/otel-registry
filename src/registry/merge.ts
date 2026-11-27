@@ -1,77 +1,43 @@
-// Turns hand-written files, Explorer options, inferred facts and check findings
-// into the list the page renders: one entry per target, best option first.
-import { TIERS } from './targets.ts';
+// Turns hand-written files, Explorer items, inferred facts and check findings into the
+// list the page renders: one entry per target, best option first. An entry carries facts
+// only; what can be derived from them (headings, labels, maintainers) is derived where
+// it is shown, see display.ts.
+import { TIERS, effectiveRepo, targetKey } from './targets.ts';
 import type { HandTarget, Tier } from './targets.ts';
 import type { GeneratedTarget } from './explorer.ts';
-import { isSubdirectory, repoKey } from './facts.ts';
+import { githubRepo, heading, optionLabel } from './display.ts';
+import { repoKey } from './facts.ts';
 import type { CncfLevel, Facts } from './facts.ts';
 import type { Finding } from './checks.ts';
 
 export interface RegistryOption {
   tier: Tier;
-  label: string;
   repo?: string;
   docs?: string;
   package?: string;
   license?: string;
-  maintainer?: string;
-  description?: string;
-  cncf?: CncfLevel;
-  source: 'file' | 'explorer';
 }
 
 export interface RegistryEntry {
-  id: string;
-  kind: 'library' | 'application';
+  target: string;
+  name?: string;
   language?: string;
-  name: string;
+  category?: 'application';
+  cncf?: CncfLevel;
   options: RegistryOption[];
 }
 
-interface RawOption {
-  tier: Tier;
-  repo?: string;
-  docs?: string;
-  package?: string;
-  license?: string;
-  note?: string;
-}
-
 const compare = (a: string, b: string) => a.localeCompare(b, 'en', { sensitivity: 'base' });
-const sortKey = (o: { package?: string; repo?: string; docs?: string }) => (o.package ? o.package.replace(/^[a-z]+:/, '') : (o.repo ?? o.docs ?? ''));
 
-function label(o: RawOption): string {
-  if (o.package) return o.package.replace(/^[a-z]+:/, '');
-  if (o.repo) {
-    const m = /^https?:\/\/github\.com\/([^/]+)\/([^/#?]+)/i.exec(o.repo);
-    if (!m) return new URL(o.repo).host;
-    const base = `${m[1]}/${m[2].replace(/\.git$/, '')}`;
-    return isSubdirectory(o.repo) ? `${base}/${o.repo.replace(/\/+$/, '').split('/').pop()}` : base;
-  }
-  return new URL(o.docs!).host;
-}
-
-function enrich(o: RawOption, source: 'file' | 'explorer', facts: Facts, cncf: Map<string, CncfLevel>): RegistryOption {
-  const key = repoKey(o.repo);
-  const fact = key ? facts.get(key) : undefined;
-  const known = fact && fact !== 'unknown' ? fact : undefined;
-  const urlOwner = o.repo ? /^https?:\/\/github\.com\/([^/]+)\//i.exec(o.repo)?.[1] : undefined;
-  const license = o.license ?? known?.license;
-  const maintainer = known?.owner ?? urlOwner;
-  const description = o.note ?? (o.repo && !isSubdirectory(o.repo) ? known?.description : undefined);
-  // OpenTelemetry is itself a CNCF project; a badge on every OTel-owned option would say nothing.
-  const level = key && o.tier !== 'otel' ? (cncf.get(key) ?? cncf.get(key.split('/')[0])) : undefined;
+function option(target: string, o: { tier: Tier; repo?: string; docs?: string; package?: string; license?: string }, facts: Facts): RegistryOption {
+  const fact = facts.get(repoKey(effectiveRepo(target, o)) ?? '');
+  const license = o.license ?? (fact && fact !== 'unknown' ? fact.license : undefined);
   return {
     tier: o.tier,
-    label: label(o),
     ...(o.repo ? { repo: o.repo } : {}),
     ...(o.docs ? { docs: o.docs } : {}),
     ...(o.package ? { package: o.package } : {}),
     ...(license ? { license } : {}),
-    ...(maintainer ? { maintainer } : {}),
-    ...(description ? { description } : {}),
-    ...(level ? { cncf: level } : {}),
-    source,
   };
 }
 
@@ -83,24 +49,55 @@ export function buildRegistry(
   findings: Finding[],
 ): RegistryEntry[] {
   const hidden = new Set(findings.map((f) => `${f.file}#${f.option}`));
-  const entries = new Map<string, RegistryEntry>();
+  // Keyed by language and target; a written name wins over one taken from the Explorer.
+  const entries = new Map<string, RegistryEntry & { written?: boolean }>();
+  const entryFor = (t: { language?: string; target: string }) => {
+    const key = targetKey(t);
+    if (!entries.has(key)) {
+      const gh = githubRepo(t.target);
+      // OpenTelemetry is itself a CNCF project; a badge on its own repositories would say nothing.
+      const level = gh && gh.owner.toLowerCase() !== 'open-telemetry' ? (cncf.get(repoKey(t.target)!) ?? cncf.get(gh.owner.toLowerCase())) : undefined;
+      entries.set(key, {
+        target: t.target,
+        ...(t.language ? { language: t.language } : { category: 'application' as const }),
+        ...(level ? { cncf: level } : {}),
+        options: [],
+      });
+    }
+    return entries.get(key)!;
+  };
 
   for (const g of generated) {
-    entries.set(g.id, { id: g.id, kind: 'library', language: g.language, name: g.name, options: [enrich(g.option, 'explorer', facts, cncf)] });
+    const e = entryFor(g);
+    // The heading of a repository is its owner/name; anything else needs a name to show.
+    if (!githubRepo(e.target)?.root && !e.name) e.name = g.name;
+    e.options.push(option(e.target, g.option, facts));
   }
   for (const t of targets) {
-    const options = t.options.filter((_, i) => !hidden.has(`${t.file}#${i}`)).map((o) => enrich(o, 'file', facts, cncf));
-    const existing = entries.get(t.id);
-    if (existing) {
-      existing.name = t.name;
-      existing.options.push(...options);
-    } else if (options.length) {
-      entries.set(t.id, { id: t.id, kind: t.kind, ...(t.language ? { language: t.language } : {}), name: t.name, options });
+    const options = t.options.filter((_, i) => !hidden.has(`${t.file}#${i}`));
+    if (!options.length && !entries.has(targetKey(t))) continue;
+    const e = entryFor(t);
+    if (t.name && !e.written) {
+      e.name = t.name;
+      e.written = true;
     }
+    e.options.push(...options.map((o) => option(e.target, o, facts)));
   }
 
-  for (const e of entries.values()) {
-    e.options.sort((a, b) => TIERS.indexOf(a.tier) - TIERS.indexOf(b.tier) || compare(sortKey(a), sortKey(b)));
+  const result = [...entries.values()].filter((e) => e.options.length);
+  for (const e of result) {
+    delete e.written;
+    e.options.sort((a, b) => TIERS.indexOf(a.tier) - TIERS.indexOf(b.tier) || compare(optionLabel(a), optionLabel(b)));
   }
-  return [...entries.values()].sort((a, b) => compare(a.name, b.name) || compare(a.id, b.id));
+  // Key order is part of the output: target first, options last.
+  return result
+    .map(({ target, name, language, category, cncf: level, options }) => ({
+      target,
+      ...(name ? { name } : {}),
+      ...(language ? { language } : {}),
+      ...(category ? { category } : {}),
+      ...(level ? { cncf: level } : {}),
+      options,
+    }))
+    .sort((a, b) => compare(heading(a), heading(b)) || compare(a.target, b.target));
 }

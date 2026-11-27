@@ -1,3 +1,4 @@
+target: https://www.mathworks.com/products/matlab.html
 name: MATLAB
 options:
   - tier: first-party

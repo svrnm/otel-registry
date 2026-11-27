@@ -1,4 +1,4 @@
-name: RoadRunner
+target: https://github.com/roadrunner-server/roadrunner
 options:
   - tier: first-party
     repo: https://github.com/roadrunner-server/otel

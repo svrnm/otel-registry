@@ -1,4 +1,4 @@
-name: Apache Log4cxx
+target: https://github.com/apache/logging-log4cxx
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/log4cxx

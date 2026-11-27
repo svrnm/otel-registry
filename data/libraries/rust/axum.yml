@@ -1,6 +1,5 @@
-name: axum
+target: https://github.com/tokio-rs/axum
 options:
   - tier: third-party
     repo: https://github.com/davidB/tracing-opentelemetry-instrumentation-sdk/tree/main/axum-tracing-opentelemetry
     package: crates:axum-tracing-opentelemetry
-    note: Middlewares to integrate axum + tracing + opentelemetry.

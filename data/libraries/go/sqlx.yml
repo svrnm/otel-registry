@@ -1,8 +1,6 @@
-name: sqlx
+target: https://github.com/jmoiron/sqlx
 options:
   - tier: third-party
     repo: https://github.com/uptrace/opentelemetry-go-extra/tree/main/otelsqlx
-    note: Instrumentation for jmoiron/sqlx that records sqlx queries and reports DBStats metrics.
   - tier: third-party
     repo: https://github.com/signalfx/splunk-otel-go/tree/main/instrumentation/github.com/jmoiron/sqlx/splunksqlx
-    note: Instrumentation for the `github.com/jmoiron/sqlx` package.

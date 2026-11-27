@@ -19,55 +19,71 @@ The background and the decisions are in [docs/design.md](docs/design.md).
 
 ## Add or fix an entry
 
-An entry is one YAML file. The path is its identity:
+An entry is one YAML file. It says **what is instrumented** and the ways to get
+telemetry from it:
 
-```
-data/libraries/<language>/<target>.yml
-data/applications/<target>.yml
+```yaml
+# data/libraries/js/nestjs.yml
+target: https://github.com/nestjs/nest
+options:
+  - tier: third-party
+    repo: https://github.com/pragmaticivan/nestjs-otel
 ```
 
 ```yaml
-# data/libraries/dotnet/aspnetcore.yml
-name: ASP.NET Core
+# data/applications/kubernetes.yml
+target: https://github.com/kubernetes/kubernetes
 options:
   - tier: native
-    repo: https://github.com/dotnet/aspnetcore
-    docs: https://learn.microsoft.com/aspnet/core/log-mon/metrics/metrics
+    docs: https://kubernetes.io/docs/concepts/cluster-administration/system-traces/
 ```
 
-```yaml
-# data/applications/traefik-proxy.yml
-name: Traefik Proxy
-options:
-  - tier: native
-    repo: https://github.com/traefik/traefik
-    docs: https://doc.traefik.io/traefik/observability/tracing/opentelemetry/
-```
+`target` is the most specific stable link to the instrumented thing: its own
+repository when it has one, otherwise its package, docs or product page
+(`https://pkg.go.dev/net/http`). **The target is the identity.** Every file and
+every Ecosystem Explorer item with the same target and language ends up on one
+card, so before adding a file, search the site for the library: if it has a
+card, use the same `target`.
 
-| Field | Required | Meaning |
-|---|---|---|
-| `name` | yes | The instrumented app or library, not the instrumentation |
-| `tier` | yes | `native`, `first-party`, `otel` or `third-party` |
-| `repo` | `repo` or `docs` | Source repository of this option |
-| `docs` | `repo` or `docs` | Page explaining how to enable telemetry |
-| `package` | no | `<ecosystem>:<name>`, for example `npm:@fastify/otel` |
-| `license` | no | SPDX identifier, only when it cannot be detected from the repository |
-| `note` | no | One line. Expected when `repo` points into a subdirectory of a shared repository |
+The folder says what kind of thing it is: `data/applications/`, or
+`data/libraries/<language>/`. The file name is yours to choose.
 
-Everything else is read when the site is built and never stored: licence,
-maintainer and description from the repository, CNCF status from the
-[CNCF landscape](https://github.com/cncf/landscape).
+| Field | Where | Required | Meaning |
+|---|---|---|---|
+| `target` | file | yes | Link to what is instrumented |
+| `name` | file | only when `target` is not a GitHub repository | What to call it, for example `net/http` |
+| `tier` | option | yes | `native`, `first-party`, `otel` or `third-party` |
+| `repo` | option | `repo` or `docs`, except for `native` | Source repository of this option |
+| `docs` | option | `repo` or `docs`, except for `native` | Page explaining how to enable telemetry |
+| `package` | option | no | `<ecosystem>:<name>`, for example `npm:@fastify/otel` |
+| `license` | option | no | SPDX identifier, only when it cannot be detected from the repository |
+
+There are no titles or descriptions. A card is headed by its target
+(`nestjs/nest`), and licence and CNCF status are read when the site is built.
 
 Rules:
 
-- File names are lower-case, with digits, hyphens and dots.
+- A `native` option needs no `repo`: native support lives in the target.
 - A library option needs a public repository.
-- Only `applications/` entries may be closed source. They give a `docs` link
-  and `license: proprietary`.
-- Instrumentation in the `open-telemetry` org is not added here. It comes from
-  the [Ecosystem Explorer](https://explorer.opentelemetry.io) when the site is
-  built. The `tier: otel` files in this repo are placeholders for languages the
-  Explorer does not cover yet.
+- Only `applications/` entries may be closed source. Their options give a
+  `docs` link and `license: proprietary`.
+- `tier: otel` is only for repositories in the `open-telemetry` org. Most of
+  those are not written here at all: they come from the
+  [Ecosystem Explorer](https://explorer.opentelemetry.io) when the site is
+  built.
+
+### Which target an Explorer item belongs to
+
+The Explorer lists OpenTelemetry-maintained instrumentation by package. For
+Java it also says what each one instruments. For everything else,
+[`data/explorer.yml`](data/explorer.yml) does:
+
+```yaml
+javascript/instrumentation-nestjs-core: https://github.com/nestjs/nest
+```
+
+An Explorer item that is not listed there still shows, under its own
+repository. The build prints how many there are.
 
 ## Checks, and what "marked" means
 
@@ -79,9 +95,10 @@ Checks are about correctness, not activity. An option fails when:
 | `abandoned` | The repository is archived |
 | `licence` | No licence is detected and none is declared |
 | `links` | The `docs` link, or a link into a repository subdirectory, does not resolve |
-| `duplicate` | The target already has an option for the same repository or package |
+| `duplicate` | The target already has an option for the same repository or package, in this or another file |
 
-- **Pull requests:** a failing option in a changed file blocks the merge.
+- **Pull requests:** a newly failing option in a changed file blocks the merge.
+  Options the tracking issue already lists do not.
 - **Weekly scan:** a failing option is *marked*. It is hidden from the site and
   listed in the issue "Marked entries" with the reason and the date.
 - **Follow up:** fix the entry, or the cause, and the mark clears on the next
@@ -110,7 +127,7 @@ nothing is checked.
 
 ## How it is put together
 
-- `data/`: the hand-written entries.
+- `data/`: the hand-written entries, and `explorer.yml`.
 - `src/registry/`: plain TypeScript with no dependency on the page. It loads
   the entries, reads the Ecosystem Explorer's data, infers facts, runs the
   checks and writes `public/registry.json` and `report.json`.
@@ -118,9 +135,6 @@ nothing is checked.
   `registry.json`. It is a visual copy of today's registry and is meant to be
   replaceable.
 - `.github/workflows/`: the pull-request check and the weekly scan.
-- `scripts/convert.ts`: the one-off conversion from opentelemetry.io's
-  `data/registry`. Kept for reference.
-
 The entries were converted from the registry data in
 [open-telemetry/opentelemetry.io](https://github.com/open-telemetry/opentelemetry.io/tree/main/data/registry).
 

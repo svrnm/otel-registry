@@ -1,6 +1,5 @@
-name: CodeIgniter
+target: https://github.com/codeigniter4/CodeIgniter4
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/CodeIgniter
     package: packagist:open-telemetry/opentelemetry-auto-codeigniter
-    note: Instrumentation Library for the CodeIgniter Framework

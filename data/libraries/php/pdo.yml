@@ -1,6 +1,6 @@
-name: PDO (PHP DataObjects)
+target: https://www.php.net/manual/en/book.pdo.php
+name: PDO
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-php-contrib/tree/main/src/Instrumentation/PDO
     package: packagist:open-telemetry/opentelemetry-auto-pdo
-    note: Instrumentation Library for PDO

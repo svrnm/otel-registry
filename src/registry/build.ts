@@ -2,19 +2,21 @@
 // the registry the page renders plus a report of check findings.
 //
 //   node src/registry/build.ts [--data data] [--explorer <ecosystem-registry dir>]
-//        [--out public/registry.json] [--report report.json] [--changed <file>...]
+//        [--out public/registry.json] [--report report.json] [--baseline <tracking issue body>] [--changed <file>...]
 //
-// Exit codes: 0 ok; 1 invalid files or an unreachable source; 2 a --changed file has a finding.
-import { mkdirSync, writeFileSync } from 'node:fs';
+// Exit codes: 0 ok; 1 invalid files or an unreachable source; 2 a --changed file has a finding that
+// the tracking issue (--baseline) does not already list.
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { parseArgs } from 'node:util';
-import { loadTargets } from './targets.ts';
-import { fetchExplorer, readExplorer } from './explorer.ts';
+import { effectiveRepo, loadTargets } from './targets.ts';
+import { fetchExplorer, readExplorer, readExplorerMap, resolveGenerated } from './explorer.ts';
 import { fetchFacts, fetchLandscape, repoKey } from './facts.ts';
 import type { CncfLevel } from './facts.ts';
 import { checkLinks, linksToCheck, runChecks, unknownOptions } from './checks.ts';
 import type { LinkStatus } from './checks.ts';
 import { buildRegistry } from './merge.ts';
+import { parseIssue } from './lifecycle.ts';
 
 const { values, positionals } = parseArgs({
   allowPositionals: true,
@@ -23,6 +25,7 @@ const { values, positionals } = parseArgs({
     explorer: { type: 'string' },
     out: { type: 'string', default: 'public/registry.json' },
     report: { type: 'string', default: 'report.json' },
+    baseline: { type: 'string' },
     changed: { type: 'boolean', default: false },
   },
 });
@@ -37,9 +40,12 @@ const write = (file: string, value: unknown) => {
 
 try {
   const targets = loadTargets(values.data);
-  const generated = readExplorer(values.explorer ?? fetchExplorer('.cache/explorer'));
+  const generated = resolveGenerated(readExplorer(values.explorer ?? fetchExplorer('.cache/explorer')), readExplorerMap(values.data));
 
-  const repos = [...targets.flatMap((t) => t.options.map((o) => o.repo)), ...generated.map((g) => g.option.repo)];
+  const repos = [
+    ...targets.flatMap((t) => [t.target, ...t.options.map((o) => effectiveRepo(t.target, o))]),
+    ...generated.flatMap((g) => [g.target, g.option.repo]),
+  ];
   const keys = [...new Set(repos.map(repoKey).filter((k): k is string => !!k))];
   const facts = await fetchFacts(keys, token);
   const cncf = offline ? new Map<string, CncfLevel>() : await fetchLandscape();
@@ -51,23 +57,29 @@ try {
 
   const moved = targets.flatMap((t) =>
     t.options.flatMap((o, option) => {
-      const fact = facts.get(repoKey(o.repo) ?? '');
+      const fact = facts.get(repoKey(effectiveRepo(t.target, o)) ?? '');
       return fact && fact !== 'unknown' && fact.movedTo ? [{ file: t.file, option, to: fact.movedTo }] : [];
     }),
   );
 
+  // Explorer items nothing says a target for; they show under their own repository until mapped in data/explorer.yml.
+  const unmapped = generated.filter((g) => !g.known).map((g) => g.ref);
+
   write(values.out, registry);
-  write(values.report, { generatedAt: new Date().toISOString(), tokenUsed: !!token, findings, unknown: unknownOptions(targets, facts, links), moved });
+  write(values.report, { generatedAt: new Date().toISOString(), tokenUsed: !!token, findings, unknown: unknownOptions(targets, facts, links), moved, unmapped });
 
   for (const f of findings) console.log(`marked  ${f.file} option ${f.option}  ${f.check}: ${f.reason}`);
   for (const m of moved) console.log(`moved   ${m.file} option ${m.option}  repository is now ${m.to}`);
   const options = registry.reduce((n, e) => n + e.options.length, 0);
-  console.log(`${registry.length} entries, ${options} options, ${findings.length} marked${token ? '' : ' (no GITHUB_TOKEN: nothing inferred, nothing checked)'}`);
+  console.log(`${registry.length} entries, ${options} options, ${findings.length} marked, ${unmapped.length} Explorer items without a known target${token ? '' : ' (no GITHUB_TOKEN: nothing inferred, nothing checked)'}`);
 
   if (values.changed) {
-    const hit = findings.filter((f) => positionals.some((p) => p === f.file || p.endsWith(`/${f.file}`)));
+    // Editing a file must not be blocked by an option in it that is already marked and tracked.
+    const marks = values.baseline && existsSync(values.baseline) ? parseIssue(readFileSync(values.baseline, 'utf8')) : {};
+    const tracked = new Set(Object.entries(marks).map(([key, m]) => `${key.split('#')[0]}|${m.reason}`));
+    const hit = findings.filter((f) => !tracked.has(`${f.file}|${f.reason}`) && positionals.some((p) => p === f.file || p.endsWith(`/${f.file}`)));
     if (hit.length) {
-      console.error(`${hit.length} finding(s) in changed files: ${[...new Set(hit.map((f) => f.file))].join(', ')}`);
+      console.error(`${hit.length} new finding(s) in changed files: ${[...new Set(hit.map((f) => f.file))].join(', ')}`);
       process.exit(2);
     }
   }

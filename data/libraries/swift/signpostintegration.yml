@@ -1,5 +1,5 @@
+target: https://github.com/open-telemetry/opentelemetry-swift/tree/main/Sources/Instrumentation/SignPostIntegration
 name: SignPost
 options:
   - tier: otel
     repo: https://github.com/open-telemetry/opentelemetry-swift/tree/main/Sources/Instrumentation/SignPostIntegration
-    note: This package creates `os_signpost` `begin` and `end` calls when spans are started or ended. It allows automatic integration of applications

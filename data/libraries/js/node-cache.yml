@@ -1,5 +1,4 @@
-name: NodeCache
+target: https://github.com/node-cache/node-cache
 options:
   - tier: third-party
     repo: https://github.com/aspecto-io/opentelemetry-ext-js/tree/master/packages/instrumentation-node-cache
-    note: NodeCache instrumentation for Node.js.
