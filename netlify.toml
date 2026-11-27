@@ -1,0 +1,8 @@
+# Set GITHUB_TOKEN (read-only, public repositories) in the site's environment variables.
+# Without it the site still builds, but nothing is inferred and nothing is hidden.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "26"

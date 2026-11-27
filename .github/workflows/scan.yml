@@ -1,0 +1,44 @@
+name: Scan
+
+# Checks every entry, updates the "Marked entries" issue and rebuilds the standing
+# removal pull request. Run it by hand ("Run workflow") to rescan before merging that
+# pull request.
+on:
+  schedule:
+    - cron: '17 5 * * 1' # Mondays 05:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Build the registry and run the checks
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm run data
+      - name: Update the tracking issue and the removal pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node src/registry/lifecycle.ts
+      - name: Rebuild the site
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        if: env.NETLIFY_BUILD_HOOK != ''
+        run: curl -fsS -X POST "$NETLIFY_BUILD_HOOK"
